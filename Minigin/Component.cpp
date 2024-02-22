@@ -2,7 +2,4 @@
 
 Component::~Component() = default;
 
-void Component::Update() 
-{
-
-}
+void Component::Update() {}

@@ -22,3 +22,24 @@ void dae::GameObject::SetPosition(float x, float y)
 {
 	m_transform.SetPosition(x, y, 0.0f);
 }
+
+void dae::GameObject::AddComponent(Component* comp) 
+{
+    m_components.push_back(comp);
+}
+
+void dae::GameObject::RemoveComponent(Component* comp) 
+{
+    m_components.erase(std::remove(m_components.begin(), m_components.end(), comp), m_components.end());
+    delete comp; // Vergeet niet om het geheugen vrij te geven
+}
+
+Component* dae::GameObject::GetComponent() 
+{
+    return nullptr;
+}
+
+bool dae::GameObject::HasComponent(Component* comp)
+{
+    return std::find(m_components.begin(), m_components.end(), comp) != m_components.end();
+}
