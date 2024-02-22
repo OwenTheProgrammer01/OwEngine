@@ -91,8 +91,9 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	bool doContinue = true;
 	auto lastTime = high_resolution_clock::now();
 	float lag = 0.0f;
-	const float fixed_time_step = 0.02f;
-	const int ms_per_frame = 16;
+	constexpr float fixed_time_step = 0.02f;
+	constexpr int FPS = 60;
+	constexpr long ms_per_frame = (1000/FPS);
 	while (doContinue)
 	{
 		const auto currentTime = high_resolution_clock::now();
