@@ -1,14 +1,17 @@
 #pragma once
 
-class Component
+namespace dae
 {
-public:
-    virtual void Update();
+    class Component
+    {
+    public:
+        virtual void Update();
 
-    Component() = default;
-    virtual ~Component();
-    Component(const Component& other) = delete;
-    Component(Component&& other) = delete;
-    Component& operator=(const Component& other) = delete;
-    Component& operator=(Component&& other) = delete;
-};
+        Component() = default;
+        virtual ~Component();
+        Component(const Component& other) = delete;
+        Component(Component&& other) = delete;
+        Component& operator=(const Component& other) = delete;
+        Component& operator=(Component&& other) = delete;
+    };
+}
