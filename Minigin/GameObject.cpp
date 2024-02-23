@@ -34,7 +34,7 @@ void dae::GameObject::RemoveComponent(Component* comp)
     delete comp; // Vergeet niet om het geheugen vrij te geven
 }
 
-Component* dae::GameObject::GetComponent() 
+dae::Component* dae::GameObject::GetComponent() 
 {
     return nullptr;
 }
