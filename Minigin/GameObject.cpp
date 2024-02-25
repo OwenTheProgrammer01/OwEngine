@@ -34,8 +34,15 @@ void dae::GameObject::RemoveComponent(Component* comp)
     delete comp;
 }
 
-dae::Component* dae::GameObject::GetComponent() 
+dae::Component* dae::GameObject::GetComponent(Component* comp) 
 {
+    for (Component* component : m_components)
+    {
+        if (component == comp)
+        {
+            return component;
+        }
+    }
     return nullptr;
 }
 

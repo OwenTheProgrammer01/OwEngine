@@ -20,7 +20,7 @@ namespace dae
 
 		void AddComponent(Component* comp);
 		void RemoveComponent(Component* comp);
-		Component* GetComponent();
+		Component* GetComponent(Component* comp);
 		bool HasComponent(Component* comp);
 
 		GameObject() = default;
