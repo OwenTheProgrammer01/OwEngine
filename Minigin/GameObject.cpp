@@ -31,7 +31,7 @@ void dae::GameObject::AddComponent(Component* comp)
 void dae::GameObject::RemoveComponent(Component* comp) 
 {
     m_components.erase(std::remove(m_components.begin(), m_components.end(), comp), m_components.end());
-    delete comp; // Vergeet niet om het geheugen vrij te geven
+    delete comp;
 }
 
 dae::Component* dae::GameObject::GetComponent() 

@@ -2,4 +2,7 @@
 
 dae::Component::~Component() = default;
 
-void dae::Component::Update() {}
+void dae::Component::Update() 
+{
+
+}

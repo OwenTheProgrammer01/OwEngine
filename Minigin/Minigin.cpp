@@ -11,6 +11,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "Time.h"
 
 using namespace std::chrono;
 
@@ -99,6 +100,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		const auto currentTime = high_resolution_clock::now();
 		const float deltaTime = duration<float>(currentTime - lastTime).count();
 		lastTime = currentTime;
+		Time::GetInstance().SetDeltaTime(deltaTime);
 		lag += deltaTime;
 
 		doContinue = input.ProcessInput();
