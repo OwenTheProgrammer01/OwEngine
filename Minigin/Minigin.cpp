@@ -92,7 +92,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	bool doContinue = true;
 	auto lastTime = high_resolution_clock::now();
 	float lag = 0.0f;
-	constexpr float fixed_time_step = 0.02f;
+	//constexpr float fixed_time_step = 0.02f;
 	constexpr int FPS = 60;
 	constexpr long ms_per_frame = (1000/FPS);
 	while (doContinue)
@@ -104,12 +104,13 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		lag += deltaTime;
 
 		doContinue = input.ProcessInput();
-		while (lag >= fixed_time_step)
-		{
-			//sceneManager.FixedUpdate(fixed_time_step);
-			lag -= fixed_time_step;
-		}
+		//while (lag >= fixed_time_step)
+		//{
+		//	//sceneManager.FixedUpdate();
+		//	lag -= fixed_time_step;
+		//}
 		sceneManager.Update();
+		//sceneManager.LateUpdate();
 		renderer.Render();
 
 		const auto sleep_time = currentTime + milliseconds(ms_per_frame) - high_resolution_clock::now();
