@@ -1,7 +1,5 @@
 #include "BaseComponent.h"
 
-dae::BaseComponent::~BaseComponent() = default;
-
 void dae::BaseComponent::Update()
 {
 

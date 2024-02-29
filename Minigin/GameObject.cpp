@@ -23,30 +23,23 @@ void dae::GameObject::SetPosition(float x, float y)
 	m_transform.SetPosition(x, y, 0.0f);
 }
 
-void dae::GameObject::AddComponent(Component* comp) 
+void dae::GameObject::AddComponent(BaseComponent* comp) 
 {
     m_components.push_back(comp);
 }
 
-void dae::GameObject::RemoveComponent(Component* comp) 
+void dae::GameObject::RemoveComponent(BaseComponent* comp) 
 {
     m_components.erase(std::remove(m_components.begin(), m_components.end(), comp), m_components.end());
     delete comp;
 }
 
-dae::Component* dae::GameObject::GetComponent(Component* comp) 
+dae::BaseComponent* dae::GameObject::GetComponent() 
 {
-    for (Component* component : m_components)
-    {
-        if (component == comp)
-        {
-            return component;
-        }
-    }
     return nullptr;
 }
 
-bool dae::GameObject::HasComponent(Component* comp)
+bool dae::GameObject::HasComponent(BaseComponent* comp)
 {
     return std::find(m_components.begin(), m_components.end(), comp) != m_components.end();
 }

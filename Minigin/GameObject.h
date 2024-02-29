@@ -2,7 +2,7 @@
 #include <memory>
 #include "Transform.h"
 #include <vector>
-#include "Component.h"
+#include "BaseComponent.h"
 
 namespace dae
 {
@@ -18,10 +18,10 @@ namespace dae
 		void SetTexture(const std::string& filename);
 		void SetPosition(float x, float y);
 
-		void AddComponent(Component* comp);
-		void RemoveComponent(Component* comp);
-		Component* GetComponent(Component* comp);
-		bool HasComponent(Component* comp);
+		void AddComponent(BaseComponent* comp);
+		void RemoveComponent(BaseComponent* comp);
+		BaseComponent* GetComponent();
+		bool HasComponent(BaseComponent* comp);
 
 		GameObject() = default;
 		virtual ~GameObject();
@@ -35,6 +35,6 @@ namespace dae
 		// todo: mmm, every gameobject has a texture? Is that correct?
 		std::shared_ptr<Texture2D> m_texture{};
 
-		std::vector<Component*> m_components;
+		std::vector<BaseComponent*> m_components;
 	};
 }

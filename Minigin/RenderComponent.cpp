@@ -1,10 +1,10 @@
 #include "RenderComponent.h"
 #include "Renderer.h"
 
-dae::RenderComponent::RenderComponent()
-{
-
-}
+//dae::RenderComponent::RenderComponent()
+//{
+//
+//}
 
 void dae::RenderComponent::Update()
 {

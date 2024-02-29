@@ -1,15 +1,15 @@
-#include "Component.h"
+#include "BaseComponent.h"
 
 namespace dae
 {
 	class Texture2D;
-	class RenderComponent : public Component
+	class RenderComponent final : public BaseComponent
 	{
 	public:
 		void Update() override;
 		void Render() const;
 
-		RenderComponent();
+		//RenderComponent();
 		virtual ~RenderComponent() = default;
 		RenderComponent(const RenderComponent& other) = delete;
 		RenderComponent(RenderComponent&& other) = delete;
