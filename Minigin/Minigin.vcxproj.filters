@@ -51,7 +51,7 @@
     <ClInclude Include="Minigin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
+    <ClInclude Include="BaseComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
@@ -98,7 +98,7 @@
     <ClCompile Include="Minigin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
+    <ClCompile Include="BaseComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
