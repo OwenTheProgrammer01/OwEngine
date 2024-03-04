@@ -7,7 +7,7 @@ namespace dae
 	{
 	public:
 		void Update() override;
-		void Render() const;
+		void Render() const override;
 
 		//RenderComponent();
 		virtual ~RenderComponent() = default;
