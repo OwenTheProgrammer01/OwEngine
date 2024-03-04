@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
+//#include "RenderComponent.h"
 
 dae::GameObject::~GameObject() = default;
 
@@ -25,6 +26,11 @@ void dae::GameObject::Render() const
 	{
 		component->Render();
 	}
+
+	/*if (HasComponent<dae::RenderComponent>())
+	{
+		GetComponent<dae::RenderComponent>()->Render();
+	}*/
 }
 
 void dae::GameObject::SetTexture(const std::string& filename)
