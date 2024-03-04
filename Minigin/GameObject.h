@@ -22,8 +22,8 @@ namespace dae
 		void SetPosition(float x, float y);
 		
 		//Components
-		template<typename T>
-		void AddComponent(T&& component) requires ComponentConcept<T>
+		//template<typename T>
+		void AddComponent(std::shared_ptr<BaseComponent> component)
 		{
 			m_components.push_back(component);
 		}

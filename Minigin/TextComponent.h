@@ -17,7 +17,7 @@ namespace dae
 		void SetText(const std::string& text);
 		void SetPosition(float x, float y);
 
-		//TextComponent(GameObject* pOwner, const std::string& text, std::shared_ptr<Font> font) : BaseComponent(pOwner), m_needsUpdate(true), m_text(text), m_font(std::move(font)), m_textTexture(nullptr) {}
+		TextComponent(GameObject* pOwner, const std::string& text, std::shared_ptr<Font> font) : BaseComponent(pOwner), m_needsUpdate(true), m_text(text), m_font(std::move(font)), m_textTexture(nullptr) {}
 		virtual ~TextComponent() = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;
