@@ -9,7 +9,6 @@ namespace dae
 	{
 	public:
 		void Update() override;
-		void FixedUpdate() override;
 
 		void Render() const;
 		void SetTexture(const std::string& filename);

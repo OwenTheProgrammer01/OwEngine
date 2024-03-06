@@ -9,8 +9,6 @@ dae::RenderComponent::RenderComponent(GameObject* pOwner)
 
 void dae::RenderComponent::Update() {}
 
-void dae::RenderComponent::FixedUpdate() {}
-
 void dae::RenderComponent::Render() const
 {
 	if (m_texture != nullptr)

@@ -7,7 +7,7 @@ namespace dae
     {
     public:
         virtual void Update() = 0;
-        virtual void FixedUpdate() = 0;
+        virtual void FixedUpdate() {};
         virtual void Render() const = 0;
 
         virtual ~BaseComponent() = default;
