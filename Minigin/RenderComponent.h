@@ -20,7 +20,8 @@ namespace dae
 		RenderComponent& operator=(const RenderComponent& other) = delete;
 		RenderComponent& operator=(RenderComponent&& other) = delete;
 	private:
-		Transform m_transform{};
+		// todo: Transform&
+		Transform m_transform; 
 		std::shared_ptr<Texture2D> m_texture{};
 	};
 }

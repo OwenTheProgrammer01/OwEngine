@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include "InputManager.h"
+#include <backends/imgui_impl_sdl2.h>
 
 bool dae::InputManager::ProcessInput()
 {
@@ -9,12 +10,15 @@ bool dae::InputManager::ProcessInput()
 			return false;
 		}
 		if (e.type == SDL_KEYDOWN) {
-			
+
 		}
 		if (e.type == SDL_MOUSEBUTTONDOWN) {
-			
+
 		}
 		// etc...
+		
+		//process event for IMGUI
+		ImGui_ImplSDL2_ProcessEvent(&e);
 	}
 
 	return true;
