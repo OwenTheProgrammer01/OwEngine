@@ -4,7 +4,8 @@
 #include "Texture2D.h"
 #include "backends/imgui_impl_sdl2.h"
 #include "backends/imgui_impl_opengl2.h"
-//#include "imgui_plot.h"
+#include "imgui_plot.h"
+#include "TrashTheCache.h"
 
 int GetOpenGLDriverIndex()
 {
@@ -46,7 +47,12 @@ void dae::Renderer::Render() const
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
-	ImGui::ShowDemoWindow();
+
+	// Begin of my widgets code
+	TrashTheCache::GetInstance().Exercise1();
+	TrashTheCache::GetInstance().Exercise2();
+	// End of my widgets code
+
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 

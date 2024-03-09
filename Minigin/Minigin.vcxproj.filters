@@ -16,6 +16,9 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{68bfc0ab-1384-44f2-ab63-85e52230fc03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="My ImGui Widgets">
+      <UniqueIdentifier>{a1ab741a-372e-430b-8a73-774ae4563119}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -90,6 +93,9 @@
     <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui_plot.h">
       <Filter>imgui</Filter>
     </ClInclude>
+    <ClInclude Include="TrashTheCache.h">
+      <Filter>My ImGui Widgets</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -157,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui_plot.cpp">
       <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashTheCache.cpp">
+      <Filter>My ImGui Widgets</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
