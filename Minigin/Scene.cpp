@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "GameObject.h"
+#include "TrashTheCache.h"
 
 #include <algorithm>
 
@@ -40,5 +41,13 @@ void Scene::Render() const
 	{
 		object->Render();
 	}
+}
+
+void Scene::RenderUI() const
+{
+	// Begin of my widgets code
+	TrashTheCache::GetInstance().Exercise1();
+	TrashTheCache::GetInstance().Exercise2();
+	// End of my widgets code
 }
 

@@ -5,7 +5,6 @@
 #include "backends/imgui_impl_sdl2.h"
 #include "backends/imgui_impl_opengl2.h"
 #include "imgui_plot.h"
-#include "TrashTheCache.h"
 
 int GetOpenGLDriverIndex()
 {
@@ -44,14 +43,13 @@ void dae::Renderer::Render() const
 	
 	SceneManager::GetInstance().Render();
 	
+	SDL_RenderFlush(m_renderer);
+
 	ImGui_ImplOpenGL2_NewFrame();
 	ImGui_ImplSDL2_NewFrame();
 	ImGui::NewFrame();
 
-	// Begin of my widgets code
-	TrashTheCache::GetInstance().Exercise1();
-	TrashTheCache::GetInstance().Exercise2();
-	// End of my widgets code
+	SceneManager::GetInstance().RenderUI();
 
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
