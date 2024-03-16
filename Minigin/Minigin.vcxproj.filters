@@ -96,6 +96,9 @@
     <ClInclude Include="TrashTheCache.h">
       <Filter>My ImGui Widgets</Filter>
     </ClInclude>
+    <ClInclude Include="FPSComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -166,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="TrashTheCache.cpp">
       <Filter>My ImGui Widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSComponent.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

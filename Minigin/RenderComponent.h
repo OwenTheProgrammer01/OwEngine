@@ -1,6 +1,7 @@
-#include "BaseComponent.h"
 #include <memory>
-#include "transform.h"
+#include <string>
+
+#include "BaseComponent.h"
 
 namespace dae
 {
@@ -9,9 +10,10 @@ namespace dae
 	{
 	public:
 		void Update() override;
+		void Render() const override;
 
-		void Render() const;
 		void SetTexture(const std::string& filename);
+		void SetTexture(std::shared_ptr<Texture2D> pTexture) { m_pTexture = std::move(pTexture); }
 
 		RenderComponent(GameObject* pOwner);
 		virtual ~RenderComponent() = default;
@@ -20,8 +22,6 @@ namespace dae
 		RenderComponent& operator=(const RenderComponent& other) = delete;
 		RenderComponent& operator=(RenderComponent&& other) = delete;
 	private:
-		// todo: Transform&
-		Transform m_transform; 
-		std::shared_ptr<Texture2D> m_texture{};
+		std::shared_ptr<Texture2D> m_pTexture{};
 	};
 }

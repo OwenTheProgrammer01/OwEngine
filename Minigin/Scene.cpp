@@ -46,8 +46,8 @@ void Scene::Render() const
 void Scene::RenderUI() const
 {
 	// Begin of my widgets code
-	TrashTheCache::GetInstance().Exercise1();
-	TrashTheCache::GetInstance().Exercise2();
+	//TrashTheCache::GetInstance().Exercise1();
+	//TrashTheCache::GetInstance().Exercise2();
 	// End of my widgets code
 }
 

@@ -1,9 +1,10 @@
 #pragma once
 #include <memory>
-#include "Transform.h"
 #include <vector>
-#include "BaseComponent.h"
 #include <type_traits>
+
+#include "Transform.h"
+#include "BaseComponent.h"
 
 namespace dae
 {
@@ -17,11 +18,8 @@ namespace dae
 	public:
 		virtual void Update();
 		virtual void Render() const;
-
-		void SetTexture(const std::string& filename);
-		void SetPosition(float x, float y);
 		
-		//Components
+		// ----------- Components -----------
 		template<typename T>
 		void AddComponent(std::shared_ptr<T> component) requires ComponentConcept<T>
 		{
@@ -52,18 +50,53 @@ namespace dae
 		{
 			return GetComponent<T>() != nullptr;
 		}
+		// ----------------------------------
+
+		// ----------- Scene Graph -----------
+		GameObject* GetParent() const;
+		void SetParent(GameObject* pParent, bool keepWorldPos = false);
+		size_t GetChildCount();
+		GameObject* GetChild(size_t idx);
+		// -----------------------------------
+
+		void SetLocalPosition(const glm::vec3& pos);
+		void SetWorldPosition(float x, float y);
+
+		const glm::vec3& GetWorldPosition();
+
+		void SetPosDirty();
+
+		const Transform& GetTransform() { return m_transform; }
+
+		void SetDeleteFlag();
+		
+		bool GetDeleteFlag() const { return m_DeleteFlag; }
 
 		GameObject() = default;
-		virtual ~GameObject();
+		virtual ~GameObject() = default;
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 	private:
-		Transform m_transform{};
-		// todo: mmm, every gameobject has a texture? Is that correct?
-		std::shared_ptr<Texture2D> m_texture{};
-		
 		std::vector<std::shared_ptr<BaseComponent>> m_components;
+
+		Transform m_transform{ this };
+
+		bool m_DeleteFlag = false;
+
+		GameObject* m_pParent;
+		std::vector<GameObject*> m_pChildren;
+
+		bool m_PositionIsDirty = false;
+
+		glm::vec3 m_WorldPosition{};
+
+		void UpdateWorldPosition();
+
+		void AddChild(GameObject* pChild);
+		void RemoveChild(GameObject* pChild);
+
+		bool IsChild(GameObject* pOwner) const;
 	};
 }

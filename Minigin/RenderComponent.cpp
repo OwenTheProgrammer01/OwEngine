@@ -1,24 +1,24 @@
-#include <string>
 #include "RenderComponent.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "GameObject.h"
 
 dae::RenderComponent::RenderComponent(GameObject* pOwner)
-	: BaseComponent(pOwner)
+	: BaseComponent(pOwner), m_pTexture{ nullptr }
 {}
 
 void dae::RenderComponent::Update() {}
 
 void dae::RenderComponent::Render() const
 {
-	if (m_texture != nullptr)
+	if (m_pTexture)
 	{
-		const auto& pos = m_transform.GetPosition();
-		Renderer::GetInstance().RenderTexture(*m_texture, pos.x, pos.y);
+		auto& worldPos{ GetOwner()->GetWorldPosition() };
+		Renderer::GetInstance().RenderTexture(*m_pTexture, worldPos.x, worldPos.y);
 	}
 }
 
 void dae::RenderComponent::SetTexture(const std::string& filename)
 {
-	m_texture = ResourceManager::GetInstance().LoadTexture(filename);
+	m_pTexture = ResourceManager::GetInstance().LoadTexture(filename);
 }

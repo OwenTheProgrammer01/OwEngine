@@ -1,11 +1,10 @@
 #include "Time.h"
 
-void dae::Time::SetDeltaTime(float deltaTime)
+void dae::Time::Update()
 {
-	m_DeltaTime = deltaTime;
-}
+	const auto currentTime{ high_resolution_clock::now() };
+	m_DeltaTime = duration<float>(currentTime - m_LastTime).count();
 
-float dae::Time::DeltaTime()
-{
-	return m_DeltaTime;
+	m_LastTime = currentTime;
+	m_Lag += m_DeltaTime;
 }
