@@ -23,21 +23,21 @@ namespace dae
 		template<typename T>
 		void AddComponent(std::shared_ptr<T> component) requires ComponentConcept<T>
 		{
-			m_components.push_back(component);
+			m_pComponents.push_back(component);
 		}
 
 		template<typename T>
 		void RemoveComponent() requires ComponentConcept<T>
 		{
-			m_components.erase(std::remove_if(m_components.begin(), m_components.end(),
+			m_pComponents.erase(std::remove_if(m_pComponents.begin(), m_pComponents.end(),
 				[](const auto& component) { return dynamic_cast<T*>(component.get()) != nullptr; }),
-				m_components.end());
+				m_pComponents.end());
 		}
 		
 		template<typename T>
 		T* GetComponent() const requires ComponentConcept<T>
 		{
-			for (const auto& component : m_components)
+			for (const auto& component : m_pComponents)
 			{
 				if (dynamic_cast<T*>(component.get()) != nullptr)
 					return dynamic_cast<T*>(component.get());
@@ -53,23 +53,20 @@ namespace dae
 		// ----------------------------------
 
 		// ----------- Scene Graph -----------
-		GameObject* GetParent() const;
 		void SetParent(GameObject* pParent, bool keepWorldPos = false);
-		size_t GetChildCount();
+		GameObject* GetParent() const { return m_pParent; }
+		size_t GetChildCount() { return m_pChildren.size(); }
 		GameObject* GetChild(size_t idx);
-		// -----------------------------------
 
 		void SetLocalPosition(const glm::vec3& pos);
+		const Transform& GetTransform() { return m_LocalPos; }
 		void SetWorldPosition(float x, float y);
-
 		const glm::vec3& GetWorldPosition();
 
 		void SetPosDirty();
-
-		const Transform& GetTransform() { return m_transform; }
+		// -----------------------------------
 
 		void SetDeleteFlag();
-		
 		bool GetDeleteFlag() const { return m_DeleteFlag; }
 
 		GameObject() = default;
@@ -79,24 +76,22 @@ namespace dae
 		GameObject& operator=(const GameObject& other) = delete;
 		GameObject& operator=(GameObject&& other) = delete;
 	private:
-		std::vector<std::shared_ptr<BaseComponent>> m_components;
-
-		Transform m_transform{ this };
-
-		bool m_DeleteFlag = false;
-
 		GameObject* m_pParent;
+
+		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
 		std::vector<GameObject*> m_pChildren;
 
-		bool m_PositionIsDirty = false;
+		Transform m_LocalPos{ this };
+		glm::vec3 m_WorldPos{};
 
-		glm::vec3 m_WorldPosition{};
+		bool m_PosIsDirty = false;
+
+		bool m_DeleteFlag = false;
 
 		void UpdateWorldPosition();
 
 		void AddChild(GameObject* pChild);
 		void RemoveChild(GameObject* pChild);
-
 		bool IsChild(GameObject* pOwner) const;
 	};
 }

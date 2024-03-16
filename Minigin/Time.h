@@ -23,7 +23,7 @@ namespace dae
 		float m_DeltaTime{ 0.f };
 		float m_Lag{ 0.f };
 		float m_FixedTimeStep{ 0.02f };
-		int m_FPS{ 165 };
+		int m_FPS{ 60 };
 		long m_MsPerFrame{ (1000 / m_FPS) };
 	};
 }
