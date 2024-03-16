@@ -105,6 +105,9 @@
     <ClInclude Include="Command.h">
       <Filter>Commands</Filter>
     </ClInclude>
+    <ClInclude Include="GameActorCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -178,6 +181,9 @@
     </ClCompile>
     <ClCompile Include="FPSComponent.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameActorCommand.cpp">
+      <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
