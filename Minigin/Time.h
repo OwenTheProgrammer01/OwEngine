@@ -17,7 +17,6 @@ namespace dae
 		float GetFixedTimeStep() const { return m_FixedTimeStep; }
 		auto GetSleepTime() const { return (m_LastTime + milliseconds(m_MsPerFrame) - high_resolution_clock::now()); }
 		bool IsLag() const { return m_Lag >= m_FixedTimeStep; }
-
 	private:
 		high_resolution_clock::time_point m_LastTime{ high_resolution_clock::now() };
 		float m_DeltaTime{ 0.f };

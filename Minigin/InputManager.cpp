@@ -19,7 +19,7 @@ bool dae::InputManager::ProcessInput()
 
 		}
 		// etc...
-		
+
 		//process event for IMGUI
 		ImGui_ImplSDL2_ProcessEvent(&e);
 	}
