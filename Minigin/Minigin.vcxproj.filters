@@ -28,6 +28,9 @@
     <Filter Include="Listener">
       <UniqueIdentifier>{263f0f4b-5d84-431f-9838-e2988b592e33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{e39ef6a0-64d4-4a4c-bf82-d725d4fc5df6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -40,9 +43,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Texture2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
@@ -99,7 +99,7 @@
     <ClInclude Include="Command.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="GameActorCommand.h">
+    <ClInclude Include="GameObjectCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="FPSComponent.h">
@@ -117,6 +117,12 @@
     <ClInclude Include="Listener.h">
       <Filter>Listener</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="ControllerInput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -126,9 +132,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Texture2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
@@ -182,7 +185,7 @@
     <ClCompile Include="TrashTheCache.cpp">
       <Filter>My ImGui Widgets</Filter>
     </ClCompile>
-    <ClCompile Include="GameActorCommand.cpp">
+    <ClCompile Include="GameObjectCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
     <ClCompile Include="FPSComponent.cpp">
@@ -196,6 +199,12 @@
     </ClCompile>
     <ClCompile Include="Listener.cpp">
       <Filter>Listener</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="ControllerInput.cpp">
+      <Filter>Input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
