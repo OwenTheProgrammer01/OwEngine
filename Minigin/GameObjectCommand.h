@@ -9,7 +9,7 @@ namespace dae
 	protected:
 		GameObject* GetGameObject() const { return m_Object; }
 	public:
-		GameObjectCommand(GameObject* object);
+		GameObjectCommand(GameObject* object) : m_Object(object) {}
 		virtual ~GameObjectCommand() = default;
 	private:
 		GameObject* m_Object;
