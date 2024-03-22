@@ -15,11 +15,18 @@ namespace dae
 		GameObject* m_Object;
 	};
 
-	class Move final : public GameObjectCommand {
+	class Movement final : public GameObjectCommand {
 	public:
+		~Movement() override = default;
+
 		void Execute() override
 		{
-			//GetGameObject()->;
+			//GetGameObject()->GetComponent<>()
 		}
+
+		Movement(const Movement&) = delete;
+		Movement& operator=(const Movement&) = delete;
+		Movement(Movement&&) = delete;
+		Movement& operator=(Movement&&) = delete;
 	};
 }

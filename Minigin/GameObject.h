@@ -23,7 +23,7 @@ namespace dae
 		template<typename T>
 		void AddComponent(std::shared_ptr<T> component) requires ComponentConcept<T>
 		{
-			m_pComponents.push_back(component);
+			m_pComponents.emplace_back(component);
 		}
 
 		template<typename T>
