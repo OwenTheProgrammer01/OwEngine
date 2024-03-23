@@ -187,11 +187,12 @@
     <ClInclude Include="..\3rdParty\imgui-1.90.4\imstb_textedit.h" />
     <ClInclude Include="..\3rdParty\imgui-1.90.4\imstb_truetype.h" />
     <ClInclude Include="BaseComponent.h" />
-    <ClInclude Include="Command.h" />
+    <ClInclude Include="Action.h" />
     <ClInclude Include="ControllerInput.h" />
+    <ClInclude Include="Device.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPSComponent.h" />
-    <ClInclude Include="GameObjectCommand.h" />
+    <ClInclude Include="GameObjectAction.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Listener.h" />

@@ -96,10 +96,10 @@
     <ClInclude Include="TrashTheCache.h">
       <Filter>My ImGui Widgets</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
+    <ClInclude Include="Action.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectCommand.h">
+    <ClInclude Include="GameObjectAction.h">
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="FPSComponent.h">
@@ -121,6 +121,9 @@
       <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="ControllerInput.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Device.h">
       <Filter>Input</Filter>
     </ClInclude>
   </ItemGroup>
