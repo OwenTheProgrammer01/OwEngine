@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <map>
 
 #include "Singleton.h"
 #include "GameObjectAction.h"
@@ -12,7 +13,8 @@ namespace dae
 	public:
 		bool ProcessInput();
 
-		void BindActionToKey(ControllerButton button, KeyState keyState, std::shared_ptr<Action> pAction);
+		void BindAction(int key, int keyState, Action* pAction);
+		void BindAction(int button, Action* pAction);
 
 		~InputManager() = default;
 		InputManager(const InputManager& other) = delete;
@@ -21,17 +23,9 @@ namespace dae
 		InputManager& operator=(InputManager&& other) = delete;
 	private:
 		friend class Singleton<InputManager>;
-		InputManager();
+		InputManager() {};
 
-		std::vector<std::unique_ptr<Device>> m_pDevices;
-
-		enum class Devices : char
-		{
-			Keyboard,
-			//Mouse,
-			Controller,
-
-			DEVICE_COUNT
-		};
+		std::map<int, std::map<int, Action*>> keyboardActions;
+		std::map<int, Action*> controllerActions;
 	};
 }

@@ -3,20 +3,8 @@
 
 #include "InputManager.h"
 
-dae::InputManager::InputManager() 
-	: m_pDevices(static_cast<size_t>(Devices::DEVICE_COUNT))
-{
-	//m_pDevices[static_cast<size_t>(Devices::Keyboard)].reset(new InputKeyboard{});
-	m_pDevices[static_cast<size_t>(Devices::Controller)].reset(new ControllerInput{});
-}
-
 bool dae::InputManager::ProcessInput()
 {
-	//for (auto& device : m_pDevices)
-	//{
-	//	device->ProcessInput();
-	//}
-
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT) {
@@ -36,7 +24,12 @@ bool dae::InputManager::ProcessInput()
 	return true;
 }
 
-void dae::InputManager::BindActionToKey(ControllerButton btn, KeyState keyState, std::shared_ptr<Action> pAction)
+void dae::InputManager::BindAction(int key, int keystate, Action* pAction) 
 {
-	m_pDevices[static_cast<size_t>(Devices::Controller)]->BindActionToKey(static_cast<unsigned>(btn), keyState, std::move(pAction));
+	keyboardActions[key][keystate] = pAction;
+}
+
+void dae::InputManager::BindAction(int button, Action* pAction) 
+{
+	controllerActions[button] = pAction;
 }
