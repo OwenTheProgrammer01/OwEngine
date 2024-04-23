@@ -1,21 +1,22 @@
 #pragma once
 #include <vector>
 #include <map>
+#include <memory>
 
 #include "Singleton.h"
-#include "GameObjectAction.h"
-#include "ControllerInput.h"
+#include "Device.h"
 
 namespace dae
 {
 	class InputManager final : public Singleton<InputManager>
 	{
 	public:
+		void AddDevice(std::unique_ptr<Device> pDevice);
+		void RemoveDevice(int userIndex);
+
 		bool ProcessInput();
 
-		void BindAction(int key, int keyState, Action* pAction);
-		void BindAction(int button, Action* pAction);
-
+		InputManager() = default;
 		~InputManager() = default;
 		InputManager(const InputManager& other) = delete;
 		InputManager(InputManager&& other) = delete;
@@ -23,9 +24,7 @@ namespace dae
 		InputManager& operator=(InputManager&& other) = delete;
 	private:
 		friend class Singleton<InputManager>;
-		InputManager() {};
 
-		std::map<int, std::map<int, Action*>> keyboardActions;
-		std::map<int, Action*> controllerActions;
+		std::vector<std::unique_ptr<Device>> m_pDevices;
 	};
 }

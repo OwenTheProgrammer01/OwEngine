@@ -17,17 +17,9 @@ namespace dae
 
 	class Movement final : public GameObjectAction {
 	public:
-		//Movement() = default;
-		//~Movement() override = default;
-
 		void Execute() override
 		{
 			//GetGameObject()->GetComponent<>()
 		}
-
-		//Movement(const Movement&) = delete;
-		//Movement& operator=(const Movement&) = delete;
-		//Movement(Movement&&) = delete;
-		//Movement& operator=(Movement&&) = delete;
 	};
 }

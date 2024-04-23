@@ -16,9 +16,6 @@
     <Filter Include="My ImGui Widgets">
       <UniqueIdentifier>{a1ab741a-372e-430b-8a73-774ae4563119}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Commands">
-      <UniqueIdentifier>{72be8bf6-e317-4c3c-b6c0-0b361908a28c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ImGui">
       <UniqueIdentifier>{68bfc0ab-1384-44f2-ab63-85e52230fc03}</UniqueIdentifier>
     </Filter>
@@ -30,6 +27,9 @@
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{e39ef6a0-64d4-4a4c-bf82-d725d4fc5df6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions">
+      <UniqueIdentifier>{72be8bf6-e317-4c3c-b6c0-0b361908a28c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -97,10 +97,10 @@
       <Filter>My ImGui Widgets</Filter>
     </ClInclude>
     <ClInclude Include="Action.h">
-      <Filter>Commands</Filter>
+      <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectAction.h">
-      <Filter>Commands</Filter>
+      <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="FPSComponent.h">
       <Filter>Components</Filter>
@@ -120,7 +120,7 @@
     <ClInclude Include="InputManager.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="ControllerInput.h">
+    <ClInclude Include="Controller.h">
       <Filter>Input</Filter>
     </ClInclude>
     <ClInclude Include="Device.h">
@@ -203,7 +203,7 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="ControllerInput.cpp">
+    <ClCompile Include="Controller.cpp">
       <Filter>Input</Filter>
     </ClCompile>
   </ItemGroup>

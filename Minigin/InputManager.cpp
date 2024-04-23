@@ -3,6 +3,19 @@
 
 #include "InputManager.h"
 
+void dae::InputManager::AddDevice(std::unique_ptr<Device> pDevice)
+{
+	m_pDevices.emplace_back(std::move(pDevice));
+}
+
+void dae::InputManager::RemoveDevice(int userIndex)
+{
+	if (userIndex >= 0 && userIndex < m_pDevices.size())
+	{
+		m_pDevices.erase(m_pDevices.begin() + userIndex);
+	}
+}
+
 bool dae::InputManager::ProcessInput()
 {
 	SDL_Event e;
@@ -21,15 +34,10 @@ bool dae::InputManager::ProcessInput()
 		//process event for IMGUI
 		ImGui_ImplSDL2_ProcessEvent(&e);
 	}
+
+	for (const auto& device : m_pDevices) {
+		device->ProcessInput();
+	}
+
 	return true;
-}
-
-void dae::InputManager::BindAction(int key, int keystate, Action* pAction) 
-{
-	keyboardActions[key][keystate] = pAction;
-}
-
-void dae::InputManager::BindAction(int button, Action* pAction) 
-{
-	controllerActions[button] = pAction;
 }

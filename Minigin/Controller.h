@@ -1,6 +1,4 @@
 #pragma once
-#include <memory>
-
 #include "Device.h"
 
 namespace dae
@@ -25,6 +23,7 @@ namespace dae
         Back,	// (Xbox) --> Share (Playstation)
         //--- Digital ---
 
+
         //--- Analog ---
         LeftThumb,	// (Xbox) --> LeftThumbStick (Playstation)
         RightThumb,	// (Xbox) --> RightThumbStick (Playstation)
@@ -34,27 +33,28 @@ namespace dae
         //--- Analog ---
     };
 
-    class ControllerImpl;
-    class ControllerInput final : public Device
-    {
-    public:
-        ControllerInput();
-        ~ControllerInput() override = default;
-
-        void ProcessInput() override;
-        void BindActionToKey(unsigned int key, KeyState keyState, std::shared_ptr<Action> pAction) override;
-
-        ControllerInput(const ControllerInput&) = delete;
-        ControllerInput(ControllerInput&&) = delete;
-        ControllerInput& operator=(const ControllerInput&) = delete;
-        ControllerInput& operator=(const ControllerInput&&) = delete;
-
-    private:
-        std::unique_ptr<ControllerImpl> m_pImpl;
-
-        unsigned int GetKeyCode(unsigned int key) const override;
-        bool IsDownThisFrame(unsigned int btn) const override;
-        bool IsUpThisFrame(unsigned int btn) const override;
-        bool IsPressed(unsigned int btn) const override;
-    };
+    //class Controller final : public Device
+    //{
+    //public:
+        //Controller(int userIndex);
+        //~Controller() override = default;
+        //
+        //void ProcessInput() override;
+        //
+        //Controller(const Controller&) = delete;
+        //Controller(Controller&&) = delete;
+        //Controller& operator=(const Controller&) = delete;
+        //Controller& operator=(const Controller&&) = delete;
+        //
+    //private:
+        //int m_UserIndex;
+        //
+        //class ControllerImpl;
+        //std::unique_ptr<ControllerImpl> m_pImpl;
+        //
+        //int GetKeyCode(int key) const;
+        //bool IsDownThisFrame(int btn) const;
+        //bool IsUpThisFrame(int btn) const;
+        //bool IsPressed(int btn) const;
+    //};
 }
