@@ -1,6 +1,6 @@
-#include "Time.h"
+#include "GameTime.h"
 
-void dae::Time::Update()
+void dae::GameTime::Update()
 {
 	const auto currentTime{ high_resolution_clock::now() };
 	m_DeltaTime = duration<float>(currentTime - m_LastTime).count();

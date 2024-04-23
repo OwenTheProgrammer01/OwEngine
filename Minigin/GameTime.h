@@ -7,7 +7,7 @@ using namespace std::chrono;
 
 namespace dae
 {
-	class Time final : public Singleton<Time>
+	class GameTime final : public Singleton<GameTime>
 	{
 	public:
 		void Update();
@@ -18,14 +18,14 @@ namespace dae
 		auto GetSleepTime() const { return (m_LastTime + milliseconds(m_MsPerFrame) - high_resolution_clock::now()); }
 		bool IsLag() const { return m_Lag >= m_FixedTimeStep; }
 
-		~Time() = default;
-		Time(const Time& other) = delete;
-		Time(Time&& other) = delete;
-		Time& operator=(const Time& other) = delete;
-		Time& operator=(Time&& other) = delete;
+		~GameTime() = default;
+		GameTime(const GameTime& other) = delete;
+		GameTime(GameTime&& other) = delete;
+		GameTime& operator=(const GameTime& other) = delete;
+		GameTime& operator=(GameTime&& other) = delete;
 	private:
-		friend class Singleton<Time>;
-		Time() = default;
+		friend class Singleton<GameTime>;
+		GameTime() = default;
 
 		high_resolution_clock::time_point m_LastTime{ high_resolution_clock::now() };
 		float m_DeltaTime{ 0.f };

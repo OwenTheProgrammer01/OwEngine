@@ -11,7 +11,7 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
-#include "Time.h"
+#include "GameTime.h"
 
 SDL_Window* g_window{};
 
@@ -85,7 +85,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& renderer{ Renderer::GetInstance() };
 	auto& sceneManager{ SceneManager::GetInstance() };
 	auto& input{ InputManager::GetInstance() };
-	auto& time{ Time::GetInstance() };
+	auto& time{ GameTime::GetInstance() };
 
 	bool doContinue = true;
 	while (doContinue)
