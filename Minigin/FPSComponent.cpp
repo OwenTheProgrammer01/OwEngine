@@ -5,7 +5,7 @@
 #include "FPSComponent.h"
 #include "GameObject.h"
 #include "TextComponent.h"
-#include "Time.h"
+#include "GameTime.h"
 
 dae::FPSComponent::FPSComponent(GameObject* pOwner)
     : BaseComponent(pOwner), m_AccumulatedTime{ 0.f }, m_FrameCount{ 0 }, m_pTextComp{ pOwner->GetComponent<dae::TextComponent>() }
@@ -15,7 +15,7 @@ dae::FPSComponent::FPSComponent(GameObject* pOwner)
 
 void dae::FPSComponent::Update()
 {
-    m_AccumulatedTime += Time::GetInstance().GetDeltaTime();
+    m_AccumulatedTime += GameTime::GetInstance().GetDeltaTime();
     ++m_FrameCount;
 
     if (m_AccumulatedTime >= m_MaxTime)
