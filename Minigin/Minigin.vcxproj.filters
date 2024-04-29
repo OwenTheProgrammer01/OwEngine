@@ -126,6 +126,9 @@
     <ClInclude Include="Device.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>Input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -201,6 +204,9 @@
       <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="Controller.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
       <Filter>Input</Filter>
     </ClCompile>
   </ItemGroup>

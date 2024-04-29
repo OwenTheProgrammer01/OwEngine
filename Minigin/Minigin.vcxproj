@@ -207,6 +207,7 @@
     <ClInclude Include="GameObjectAction.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Listener.h" />
     <ClInclude Include="Minigin.h" />
     <ClInclude Include="RenderComponent.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="FPSComponent.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Listener.cpp" />
     <ClCompile Include="Minigin.cpp" />
     <ClCompile Include="RenderComponent.cpp" />

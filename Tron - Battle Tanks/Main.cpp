@@ -17,10 +17,12 @@
 #include "TextComponent.h"
 #include "FPSComponent.h"
 
+#include "Controller.h"
+
 void load()
 {
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
-	//auto& input = dae::InputManager::GetInstance();
+	auto& input = dae::InputManager::GetInstance();
 
 	//---------- (Components) ----------
 	auto goBackground = std::make_shared<dae::GameObject>();
@@ -63,9 +65,10 @@ void load()
 
 	//------------------------------------------------
 
-	//---------- (Command & Pimple) ----------
+	//---------- (Command & Pimpl) ----------
+	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
+	input.RemoveDevice(0);
 	//input.BindActionToKey(dae::ControllerButton::A, dae::KeyState::Pressed, std::make_shared<dae::Movement>());
-
 	//-------------------------------------------------------
 
 	//---------- (Observer & Event queue) ----------

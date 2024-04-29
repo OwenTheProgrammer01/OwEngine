@@ -1,6 +1,7 @@
 #pragma once
 #include "Action.h"
 #include "GameObject.h"
+#include <iostream>
 
 namespace dae
 {
@@ -19,6 +20,7 @@ namespace dae
 	public:
 		void Execute() override
 		{
+			std::cout << "Move" << std::endl;
 			//GetGameObject()->GetComponent<>()
 		}
 	};
