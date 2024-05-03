@@ -21,7 +21,7 @@ namespace dae
 		void Execute() override
 		{
 			std::cout << "Move" << std::endl;
-			//GetGameObject()->GetComponent<>()
+			//GetGameObject()->GetComponent<>();
 		}
 	};
 }

@@ -16,6 +16,16 @@ void dae::InputManager::RemoveDevice(int userIndex)
 	}
 }
 
+//void dae::InputManager::BindCommand(int key, int keystate, Action* action)
+//{
+//	keyboardCommands[key][keystate] = action;
+//}
+//
+//void dae::InputManager::BindCommand(int button, Action* action)
+//{
+//	controllerCommands[button] = action;
+//}
+
 bool dae::InputManager::ProcessInput()
 {
 	SDL_Event e;

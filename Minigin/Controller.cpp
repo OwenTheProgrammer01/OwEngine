@@ -32,17 +32,40 @@ dae::Controller::ControllerImpl::ControllerImpl()
 
 void dae::Controller::ControllerImpl::ProcessInput()
 {
-	XINPUT_STATE previousState{};
+	DWORD dwResult;
+	for (DWORD i = 0; i < XUSER_MAX_COUNT; i++)
+	{
+		XINPUT_STATE state;
+		ZeroMemory(&state, sizeof(XINPUT_STATE));
 
-	CopyMemory(&previousState, &m_CurrentState, sizeof(XINPUT_STATE));
-	ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-	XInputGetState(m_ControllerIndex, &m_CurrentState);
+		// Simply get the state of the controller from XInput.
+		dwResult = XInputGetState(i, &state);
 
-	auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ previousState.Gamepad.wButtons;
-	m_ButtonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
-	m_ButtonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
+		if (dwResult == ERROR_SUCCESS)
+		{
+			// Controller is connected
+			std::cout << "\rController is connected";
+		}
+		else
+		{
+			// Controller is not connected
+			std::cout << "\rController is not connected";
+		}
+	}
+
+	//XINPUT_STATE previousState{};
+	//
+	//CopyMemory(&previousState, &m_CurrentState, sizeof(XINPUT_STATE));
+	//ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
+	//XInputGetState(m_ControllerIndex, &m_CurrentState);
+	//
+	//auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ previousState.Gamepad.wButtons;
+	//m_ButtonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
+	//m_ButtonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
+
+	//std::cout << "\rsThumbLX: " << m_CurrentState.Gamepad.sThumbLX << " - sThumbRX: " << m_CurrentState.Gamepad.sThumbRX;
 	
-	std::cout << "Pressed: " << m_ButtonsPressedThisFrame << std::endl;
+	//std::cout << "Pressed: " << m_ButtonsPressedThisFrame << std::endl;
 }
 
 int dae::Controller::ControllerImpl::GetKeyCode(int btn) const

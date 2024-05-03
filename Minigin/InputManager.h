@@ -14,6 +14,9 @@ namespace dae
 		void AddDevice(std::unique_ptr<Device> pDevice);
 		void RemoveDevice(int userIndex);
 
+		//void BindCommand(int key, int keystate, Action* command); // For keyboard input
+		//void BindCommand(int button, Action* command); // For controller input
+
 		bool ProcessInput();
 
 		InputManager() = default;
@@ -26,5 +29,8 @@ namespace dae
 		friend class Singleton<InputManager>;
 
 		std::vector<std::unique_ptr<Device>> m_pDevices;
+
+		std::map<int, std::map<int, Action*>> keyboardCommands; // key -> keystate -> action
+		std::map<int, Action*> controllerCommands; // button -> action
 	};
 }
