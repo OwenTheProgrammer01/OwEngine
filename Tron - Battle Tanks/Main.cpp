@@ -18,6 +18,7 @@
 #include "FPSComponent.h"
 
 #include "Controller.h"
+#include "GameObjectAction.h"
 
 void load()
 {
@@ -67,7 +68,11 @@ void load()
 
 	//---------- (Command & Pimpl) ----------
 	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
-	//input.BindCommand(static_cast<int>(dae::ControllerButton::DPadDown), movement.get()); // Example for controller input
+	//auto goa = std::make_shared<dae::GameObject>();
+	//auto goal = std::make_unique<dae::GameObjectAction>(goa);
+	auto goals = std::make_shared<dae::Movement>();
+	input.BindCommand(dae::ControllerButton::DPadDown, goals); // Example for controller input
+	//input.BindCommand(dae::ControllerButton::DPadDown, movement.get()); // Example for controller input
 	//input.RemoveDevice(0);
 	//input.BindActionToKey(dae::ControllerButton::A, dae::KeyState::Pressed, std::make_shared<dae::Movement>());
 	//-------------------------------------------------------

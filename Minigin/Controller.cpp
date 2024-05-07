@@ -9,7 +9,7 @@
 class dae::Controller::ControllerImpl
 {
 public:
-	ControllerImpl();
+	ControllerImpl(int controllerIndex);
 	~ControllerImpl() = default;
 
 	void ProcessInput();
@@ -26,46 +26,32 @@ private:
 	DWORD m_ControllerIndex;
 };
 
-dae::Controller::ControllerImpl::ControllerImpl()
-	: m_CurrentState{}, m_ButtonsPressedThisFrame{}, m_ButtonsReleasedThisFrame{}, m_ControllerIndex{}
+dae::Controller::ControllerImpl::ControllerImpl(int controllerIndex)
+	: m_CurrentState{}, m_ButtonsPressedThisFrame{}, m_ButtonsReleasedThisFrame{}, m_ControllerIndex{ static_cast<DWORD>(controllerIndex) }
 {}
 
 void dae::Controller::ControllerImpl::ProcessInput()
 {
-	DWORD dwResult;
-	for (DWORD i = 0; i < XUSER_MAX_COUNT; i++)
-	{
-		XINPUT_STATE state;
-		ZeroMemory(&state, sizeof(XINPUT_STATE));
-
-		// Simply get the state of the controller from XInput.
-		dwResult = XInputGetState(i, &state);
-
-		if (dwResult == ERROR_SUCCESS)
-		{
-			// Controller is connected
-			std::cout << "\rController is connected";
-		}
-		else
-		{
-			// Controller is not connected
-			std::cout << "\rController is not connected";
-		}
-	}
-
-	//XINPUT_STATE previousState{};
-	//
-	//CopyMemory(&previousState, &m_CurrentState, sizeof(XINPUT_STATE));
-	//ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-	//XInputGetState(m_ControllerIndex, &m_CurrentState);
-	//
-	//auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ previousState.Gamepad.wButtons;
-	//m_ButtonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
-	//m_ButtonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
-
-	//std::cout << "\rsThumbLX: " << m_CurrentState.Gamepad.sThumbLX << " - sThumbRX: " << m_CurrentState.Gamepad.sThumbRX;
+	XINPUT_STATE previousState{};
 	
-	//std::cout << "Pressed: " << m_ButtonsPressedThisFrame << std::endl;
+	CopyMemory(&previousState, &m_CurrentState, sizeof(XINPUT_STATE));
+	ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
+	DWORD dwResult = XInputGetState(m_ControllerIndex, &m_CurrentState);
+	
+	auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ previousState.Gamepad.wButtons;
+	m_ButtonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
+	m_ButtonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
+	
+	if (dwResult == ERROR_SUCCESS)
+	{
+		// Controller is connected
+		std::cout << "\rController is connected";
+	}
+	else
+	{
+		// Controller is not connected
+		std::cout << "\rController is not connected";
+	}
 }
 
 int dae::Controller::ControllerImpl::GetKeyCode(int btn) const
@@ -74,18 +60,10 @@ int dae::Controller::ControllerImpl::GetKeyCode(int btn) const
 
 	switch (button)
 	{
-	case ControllerButton::A: return 0x1000;
-	case ControllerButton::B: return 0x2000;
-	case ControllerButton::X: return 0x4000;
-	case ControllerButton::Y: return 0x8000;
-
 	case ControllerButton::DPadUp: return 0x0001;
 	case ControllerButton::DPadDown: return 0x0002;
 	case ControllerButton::DPadLeft: return 0x0004;
 	case ControllerButton::DPadRight: return 0x0008;
-
-	case ControllerButton::LeftShoulder: return 0x0100;
-	case ControllerButton::RightShoulder: return 0x0200;
 
 	case ControllerButton::Start: return 0x0010;
 	case ControllerButton::Back: return 0x0020;
@@ -93,12 +71,20 @@ int dae::Controller::ControllerImpl::GetKeyCode(int btn) const
 	case ControllerButton::LeftThumb: return 0x0040;
 	case ControllerButton::RightThumb: return 0x0080;
 
+	case ControllerButton::LeftShoulder: return 0x0100;
+	case ControllerButton::RightShoulder: return 0x0200;
+
+	case ControllerButton::A: return 0x1000;
+	case ControllerButton::B: return 0x2000;
+	case ControllerButton::X: return 0x4000;
+	case ControllerButton::Y: return 0x8000;
+
 	default: return 0x0000;
 	}
 }
 
-dae::Controller::Controller(int userIndex)
-	: Device{}, m_UserIndex(userIndex), m_pImpl(std::make_unique<ControllerImpl>())
+dae::Controller::Controller(int controllerIndex)
+	: Device{}, m_UserIndex(controllerIndex), m_pImpl(std::make_unique<ControllerImpl>(controllerIndex))
 {}
 
 dae::Controller::~Controller() = default;

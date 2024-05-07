@@ -4,7 +4,9 @@
 #include <memory>
 
 #include "Singleton.h"
-#include "Device.h"
+#include "Controller.h"
+#include "Keyboard.h"
+#include "GameObjectAction.h"
 
 namespace dae
 {
@@ -15,7 +17,7 @@ namespace dae
 		void RemoveDevice(int userIndex);
 
 		//void BindCommand(int key, int keystate, Action* command); // For keyboard input
-		//void BindCommand(int button, Action* command); // For controller input
+		void BindCommand(ControllerButton button, std::shared_ptr<Action> command); // For controller input
 
 		bool ProcessInput();
 
@@ -31,6 +33,6 @@ namespace dae
 		std::vector<std::unique_ptr<Device>> m_pDevices;
 
 		std::map<int, std::map<int, Action*>> keyboardCommands; // key -> keystate -> action
-		std::map<int, Action*> controllerCommands; // button -> action
+		std::map<ControllerButton, std::shared_ptr<Action>> controllerCommands; // button -> action
 	};
 }

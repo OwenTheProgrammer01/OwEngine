@@ -20,11 +20,11 @@ void dae::InputManager::RemoveDevice(int userIndex)
 //{
 //	keyboardCommands[key][keystate] = action;
 //}
-//
-//void dae::InputManager::BindCommand(int button, Action* action)
-//{
-//	controllerCommands[button] = action;
-//}
+
+void dae::InputManager::BindCommand(ControllerButton button, std::shared_ptr<Action> action)
+{
+	controllerCommands[button] = action;
+}
 
 bool dae::InputManager::ProcessInput()
 {
