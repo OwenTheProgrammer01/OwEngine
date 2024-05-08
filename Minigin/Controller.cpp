@@ -14,11 +14,10 @@ public:
 
 	void ProcessInput();
 
-	int GetKeyCode(int btn) const;
-	bool IsDownThisFrame(unsigned int btn) const { return m_ButtonsPressedThisFrame & btn; }
-	bool IsUpThisFrame(unsigned int btn) const { return m_ButtonsReleasedThisFrame & btn; }
-	bool IsPressed(unsigned int btn) const { return m_CurrentState.Gamepad.wButtons & btn; }
-
+	unsigned int GetButtonCode(Buttons button) const;
+	bool IsPressed(unsigned int button) const { return m_CurrentState.Gamepad.wButtons & button; }
+	bool IsPressedThisFrame(unsigned int button) const { return m_ButtonsPressedThisFrame & button; }
+	bool IsReleasedThisFrame(unsigned int button) const { return m_ButtonsReleasedThisFrame & button; }
 private:
 	XINPUT_STATE m_CurrentState;
 	int m_ButtonsPressedThisFrame;
@@ -36,13 +35,14 @@ void dae::Controller::ControllerImpl::ProcessInput()
 	
 	CopyMemory(&previousState, &m_CurrentState, sizeof(XINPUT_STATE));
 	ZeroMemory(&m_CurrentState, sizeof(XINPUT_STATE));
-	DWORD dwResult = XInputGetState(m_ControllerIndex, &m_CurrentState);
+	/*DWORD dwResult =*/ XInputGetState(m_ControllerIndex, &m_CurrentState);
 	
 	auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ previousState.Gamepad.wButtons;
 	m_ButtonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
 	m_ButtonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
 	
-	if (dwResult == ERROR_SUCCESS)
+	/* CHECK IF CONTROLLER IS CONNECTED */
+	/*if (dwResult == ERROR_SUCCESS)
 	{
 		// Controller is connected
 		std::cout << "\rController is connected";
@@ -51,35 +51,33 @@ void dae::Controller::ControllerImpl::ProcessInput()
 	{
 		// Controller is not connected
 		std::cout << "\rController is not connected";
-	}
+	}*/
 }
 
-int dae::Controller::ControllerImpl::GetKeyCode(int btn) const
+unsigned int dae::Controller::ControllerImpl::GetButtonCode(Buttons button) const
 {
-	ControllerButton button{ static_cast<ControllerButton>(btn) };
-
 	switch (button)
 	{
-	case ControllerButton::DPadUp: return 0x0001;
-	case ControllerButton::DPadDown: return 0x0002;
-	case ControllerButton::DPadLeft: return 0x0004;
-	case ControllerButton::DPadRight: return 0x0008;
+	case Buttons::DPadUp:			return 0x0001;
+	case Buttons::DPadDown:			return 0x0002;
+	case Buttons::DPadLeft:			return 0x0004;
+	case Buttons::DPadRight:		return 0x0008;
 
-	case ControllerButton::Start: return 0x0010;
-	case ControllerButton::Back: return 0x0020;
+	case Buttons::Start:			return 0x0010;
+	case Buttons::Back:				return 0x0020;
 
-	case ControllerButton::LeftThumb: return 0x0040;
-	case ControllerButton::RightThumb: return 0x0080;
+	case Buttons::LeftThumb:		return 0x0040;
+	case Buttons::RightThumb:		return 0x0080;
 
-	case ControllerButton::LeftShoulder: return 0x0100;
-	case ControllerButton::RightShoulder: return 0x0200;
+	case Buttons::LeftShoulder:		return 0x0100;
+	case Buttons::RightShoulder:	return 0x0200;
 
-	case ControllerButton::A: return 0x1000;
-	case ControllerButton::B: return 0x2000;
-	case ControllerButton::X: return 0x4000;
-	case ControllerButton::Y: return 0x8000;
+	case Buttons::A:				return 0x1000;
+	case Buttons::B:				return 0x2000;
+	case Buttons::X:				return 0x4000;
+	case Buttons::Y:				return 0x8000;
 
-	default: return 0x0000;
+	default:						return 0x0000;
 	}
 }
 
@@ -94,22 +92,44 @@ void dae::Controller::ProcessInput()
 	m_pImpl->ProcessInput();
 }
 
-int dae::Controller::GetKeyCode(int key) const
+void dae::Controller::ProcessActions(std::map<State, std::map<Buttons, std::shared_ptr<Action>>> controllerCommands)
 {
-	return m_pImpl->GetKeyCode(key);
+	for (const auto& map : controllerCommands[State::IsPressed]) {
+		if (IsPressed(GetButtonCode(map.first)))
+		{
+			map.second->Execute();
+		}
+	}
+	for (const auto& map : controllerCommands[State::IsPressedThisFrame]) {
+		if (IsPressedThisFrame(GetButtonCode(map.first)))
+		{
+			map.second->Execute();
+		}
+	}
+	for (const auto& map : controllerCommands[State::IsReleasedThisFrame]) {
+		if (IsReleasedThisFrame(GetButtonCode(map.first)))
+		{
+			map.second->Execute();
+		}
+	}
 }
 
-bool dae::Controller::IsDownThisFrame(int btn) const
+unsigned int dae::Controller::GetButtonCode(Buttons button) const
 {
-	return m_pImpl->IsDownThisFrame(btn);
+	return m_pImpl->GetButtonCode(button);
 }
 
-bool dae::Controller::IsUpThisFrame(int btn) const 
+bool dae::Controller::IsPressed(unsigned int button) const
 {
-	return m_pImpl->IsUpThisFrame(btn);
+	return m_pImpl->IsPressed(button);
 }
 
-bool dae::Controller::IsPressed(int btn) const 
+bool dae::Controller::IsPressedThisFrame(unsigned int button) const
 {
-	return m_pImpl->IsPressed(btn); 
+	return m_pImpl->IsPressedThisFrame(button);
+}
+
+bool dae::Controller::IsReleasedThisFrame(unsigned int button) const
+{
+	return m_pImpl->IsReleasedThisFrame(button);
 }

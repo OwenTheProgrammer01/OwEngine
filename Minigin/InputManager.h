@@ -16,8 +16,8 @@ namespace dae
 		void AddDevice(std::unique_ptr<Device> pDevice);
 		void RemoveDevice(int userIndex);
 
-		//void BindCommand(int key, int keystate, Action* command); // For keyboard input
-		void BindCommand(ControllerButton button, std::shared_ptr<Action> command); // For controller input
+		void BindCommand(State state, Keys key, std::shared_ptr<Action> command); // For keyboard input
+		void BindCommand(State state, Buttons button, std::shared_ptr<Action> command); // For controller input
 
 		bool ProcessInput();
 
@@ -32,7 +32,7 @@ namespace dae
 
 		std::vector<std::unique_ptr<Device>> m_pDevices;
 
-		std::map<int, std::map<int, Action*>> keyboardCommands; // key -> keystate -> action
-		std::map<ControllerButton, std::shared_ptr<Action>> controllerCommands; // button -> action
+		std::map<State, std::map<Keys, std::shared_ptr<Action>>> m_keyboardCommands; // state -> key -> action
+		std::map<State, std::map<Buttons, std::shared_ptr<Action>>> m_controllerCommands; // state -> button -> action
 	};
 }

@@ -16,14 +16,14 @@ void dae::InputManager::RemoveDevice(int userIndex)
 	}
 }
 
-//void dae::InputManager::BindCommand(int key, int keystate, Action* action)
-//{
-//	keyboardCommands[key][keystate] = action;
-//}
-
-void dae::InputManager::BindCommand(ControllerButton button, std::shared_ptr<Action> action)
+void dae::InputManager::BindCommand(State state, Keys key, std::shared_ptr<Action> action)
 {
-	controllerCommands[button] = action;
+	m_keyboardCommands[state][key] = action;
+}
+
+void dae::InputManager::BindCommand(State state, Buttons button, std::shared_ptr<Action> action)
+{
+	m_controllerCommands[state][button] = action;
 }
 
 bool dae::InputManager::ProcessInput()
@@ -47,6 +47,8 @@ bool dae::InputManager::ProcessInput()
 
 	for (const auto& device : m_pDevices) {
 		device->ProcessInput();
+		device->ProcessActions(m_controllerCommands);
+		//device->ProcessActions(m_keyboardCommands);
 	}
 
 	return true;

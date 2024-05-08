@@ -68,13 +68,18 @@ void load()
 
 	//---------- (Command & Pimpl) ----------
 	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
-	//auto goa = std::make_shared<dae::GameObject>();
-	//auto goal = std::make_unique<dae::GameObjectAction>(goa);
-	auto goals = std::make_shared<dae::Movement>();
-	input.BindCommand(dae::ControllerButton::DPadDown, goals); // Example for controller input
-	//input.BindCommand(dae::ControllerButton::DPadDown, movement.get()); // Example for controller input
-	//input.RemoveDevice(0);
-	//input.BindActionToKey(dae::ControllerButton::A, dae::KeyState::Pressed, std::make_shared<dae::Movement>());
+	auto gameObject = std::make_shared<dae::GameObject>();
+	auto moveAction = std::make_shared<dae::Movement>(gameObject.get());
+	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadLeft, moveAction); // Example for controller input
+	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadRight, moveAction);
+	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadUp, moveAction);
+	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadDown, moveAction);
+
+	auto shootAction = std::make_shared<dae::Shoot>(gameObject.get());
+	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::RightShoulder, shootAction);
+
+	auto aimAction = std::make_shared<dae::Aim>(gameObject.get());
+	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::LeftShoulder, aimAction);
 	//-------------------------------------------------------
 
 	//---------- (Observer & Event queue) ----------
