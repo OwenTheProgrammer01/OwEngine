@@ -59,12 +59,13 @@ void load()
 	goFPS->AddComponent(fcFPS);
 	goFPS->SetLocalPosition({ 0,0,0 });
 	scene.Add(goFPS);
-	//-----------------------------------------------
+	//----------------------------------
+
 
 	//---------- (Scene graph) ----------
 
+	//-----------------------------------
 
-	//------------------------------------------------
 
 	//---------- (Command & Pimpl) ----------
 	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
@@ -80,7 +81,8 @@ void load()
 
 	auto aimAction = std::make_shared<dae::Aim>(gameObject.get());
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::LeftShoulder, aimAction);
-	//-------------------------------------------------------
+	//---------------------------------------
+
 
 	//---------- (Observer & Event queue) ----------
 

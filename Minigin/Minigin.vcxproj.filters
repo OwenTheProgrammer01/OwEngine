@@ -22,14 +22,14 @@
     <Filter Include="Components">
       <UniqueIdentifier>{bd7c7e36-f176-415e-aa46-cb1607130d73}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Listener">
-      <UniqueIdentifier>{263f0f4b-5d84-431f-9838-e2988b592e33}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{e39ef6a0-64d4-4a4c-bf82-d725d4fc5df6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actions">
       <UniqueIdentifier>{72be8bf6-e317-4c3c-b6c0-0b361908a28c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event Manager">
+      <UniqueIdentifier>{ff87e295-f98c-4bca-b0d2-e1d715cc7b4d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -114,9 +114,6 @@
     <ClInclude Include="TextComponent.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Listener.h">
-      <Filter>Listener</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -128,6 +125,15 @@
     </ClInclude>
     <ClInclude Include="Keyboard.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Event Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Event Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Event Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +203,6 @@
     <ClCompile Include="TextComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Listener.cpp">
-      <Filter>Listener</Filter>
-    </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Input</Filter>
     </ClCompile>
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="Keyboard.cpp">
       <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Event Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
