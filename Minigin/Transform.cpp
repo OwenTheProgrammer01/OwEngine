@@ -4,7 +4,7 @@
 #include "Transform.h"
 #include "GameObject.h"
 
-dae::Transform::Transform(GameObject* pGameObj) :
+dae::Transform::Transform(GameActor* pGameObj) :
 	m_position{}, m_pGameObject{ pGameObj }
 {
 	assert(m_pGameObject);

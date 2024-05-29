@@ -11,7 +11,7 @@
 #include "InputManager.h"
 #include "Scene.h"
 
-#include "GameObject.h"
+#include "GameActor.h"
 
 #include "RenderComponent.h"
 #include "TextComponent.h"
@@ -26,39 +26,39 @@ void load()
 	auto& input = dae::InputManager::GetInstance();
 
 	//---------- (Components) ----------
-	auto goBackground = std::make_shared<dae::GameObject>();
-	auto rcBackground = std::make_shared<dae::RenderComponent>(goBackground.get());
+	auto gaBackground = std::make_shared<dae::GameActor>();
+	auto rcBackground = std::make_shared<dae::RenderComponent>(gaBackground.get());
 	rcBackground->SetTexture("background.tga");
-	goBackground->AddComponent(rcBackground);
-	scene.Add(goBackground);
+	gaBackground->AddComponent(rcBackground);
+	scene.Add(gaBackground);
 
-	auto goLogo = std::make_shared<dae::GameObject>();
-	auto rcLogo = std::make_shared<dae::RenderComponent>(goLogo.get());
+	auto gaLogo = std::make_shared<dae::GameActor>();
+	auto rcLogo = std::make_shared<dae::RenderComponent>(gaLogo.get());
 	rcLogo->SetTexture("logo.tga");
-	goLogo->AddComponent(rcLogo);
-	goLogo->SetLocalPosition({ 216, 180, 0 });
-	scene.Add(goLogo);
+	gaLogo->AddComponent(rcLogo);
+	gaLogo->SetLocalPosition({ 216, 180, 0 });
+	scene.Add(gaLogo);
 
-	auto goTitle = std::make_shared<dae::GameObject>();
-	auto rcTitle = std::make_shared<dae::RenderComponent>(goTitle.get());
-	goTitle->AddComponent(rcTitle);
+	auto gaTitle = std::make_shared<dae::GameActor>();
+	auto rcTitle = std::make_shared<dae::RenderComponent>(gaTitle.get());
+	gaTitle->AddComponent(rcTitle);
 
 	auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
-	auto tcTitle = std::make_shared<dae::TextComponent>(goTitle.get(), font);
+	auto tcTitle = std::make_shared<dae::TextComponent>(gaTitle.get(), font);
 	tcTitle->SetText("Programming 4 Assignment");
-	goTitle->AddComponent(tcTitle);
-	goTitle->SetLocalPosition({ 80, 20, 0 });
-	scene.Add(goTitle);
+	gaTitle->AddComponent(tcTitle);
+	gaTitle->SetLocalPosition({ 80, 20, 0 });
+	scene.Add(gaTitle);
 
-	auto goFPS = std::make_shared<dae::GameObject>();
-	auto rcFPS = std::make_shared<dae::RenderComponent>(goFPS.get());
-	goFPS->AddComponent(rcFPS);
-	auto tcFPS = std::make_shared<dae::TextComponent>(goFPS.get(), font);
-	goFPS->AddComponent(tcFPS);
-	auto fcFPS = std::make_shared<dae::FPSComponent>(goFPS.get());
-	goFPS->AddComponent(fcFPS);
-	goFPS->SetLocalPosition({ 0,0,0 });
-	scene.Add(goFPS);
+	auto gaFPS = std::make_shared<dae::GameActor>();
+	auto rcFPS = std::make_shared<dae::RenderComponent>(gaFPS.get());
+	gaFPS->AddComponent(rcFPS);
+	auto tcFPS = std::make_shared<dae::TextComponent>(gaFPS.get(), font);
+	gaFPS->AddComponent(tcFPS);
+	auto fcFPS = std::make_shared<dae::FPSComponent>(gaFPS.get());
+	gaFPS->AddComponent(fcFPS);
+	gaFPS->SetLocalPosition({ 0,0,0 });
+	scene.Add(gaFPS);
 	//----------------------------------
 
 
@@ -69,17 +69,17 @@ void load()
 
 	//---------- (Command & Pimpl) ----------
 	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
-	auto gameObject = std::make_shared<dae::GameObject>();
-	auto moveAction = std::make_shared<dae::Movement>(gameObject.get());
+	auto gameActor = std::make_shared<dae::GameActor>();
+	auto moveAction = std::make_shared<dae::Movement>(gameActor.get());
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadLeft, moveAction); // Example for controller input
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadRight, moveAction);
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadUp, moveAction);
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadDown, moveAction);
 
-	auto shootAction = std::make_shared<dae::Shoot>(gameObject.get());
+	auto shootAction = std::make_shared<dae::Shoot>(gameActor.get());
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::RightShoulder, shootAction);
 
-	auto aimAction = std::make_shared<dae::Aim>(gameObject.get());
+	auto aimAction = std::make_shared<dae::Aim>(gameActor.get());
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::LeftShoulder, aimAction);
 	//---------------------------------------
 

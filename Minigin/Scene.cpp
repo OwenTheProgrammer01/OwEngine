@@ -1,53 +1,53 @@
 #include "Scene.h"
-#include "GameObject.h"
+#include "GameActor.h"
 #include "TrashTheCache.h"
 
 #include <algorithm>
 
-using namespace dae;
-
-unsigned int Scene::m_idCounter = 0;
-
-Scene::Scene(const std::string& name) : m_name(name) {}
-
-Scene::~Scene() = default;
-
-void Scene::Add(std::shared_ptr<GameObject> object)
+namespace dae
 {
-	m_objects.emplace_back(std::move(object));
-}
+	unsigned int Scene::m_idCounter = 0;
 
-void Scene::Remove(std::shared_ptr<GameObject> object)
-{
-	m_objects.erase(std::remove(m_objects.begin(), m_objects.end(), object), m_objects.end());
-}
+	Scene::Scene(const std::string& name) : m_name(name) {}
 
-void Scene::RemoveAll()
-{
-	m_objects.clear();
-}
+	Scene::~Scene() = default;
 
-void Scene::Update()
-{
-	for(auto& object : m_objects)
+	void Scene::Add(std::shared_ptr<GameActor> actor)
 	{
-		object->Update();
+		m_objects.emplace_back(std::move(actor));
+	}
+
+	void Scene::Remove(std::shared_ptr<GameActor> actor)
+	{
+		m_objects.erase(std::remove(m_objects.begin(), m_objects.end(), actor), m_objects.end());
+	}
+
+	void Scene::RemoveAll()
+	{
+		m_objects.clear();
+	}
+
+	void Scene::Update()
+	{
+		for (auto& object : m_objects)
+		{
+			object->Update();
+		}
+	}
+
+	void Scene::Render() const
+	{
+		for (const auto& object : m_objects)
+		{
+			object->Render();
+		}
+	}
+
+	void Scene::RenderUI() const
+	{
+		// Begin of my widgets code
+		//TrashTheCache::GetInstance().Exercise1();
+		//TrashTheCache::GetInstance().Exercise2();
+		// End of my widgets code
 	}
 }
-
-void Scene::Render() const
-{
-	for (const auto& object : m_objects)
-	{
-		object->Render();
-	}
-}
-
-void Scene::RenderUI() const
-{
-	// Begin of my widgets code
-	//TrashTheCache::GetInstance().Exercise1();
-	//TrashTheCache::GetInstance().Exercise2();
-	// End of my widgets code
-}
-

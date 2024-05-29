@@ -1,9 +1,9 @@
 #include "RenderComponent.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
-#include "GameObject.h"
+#include "GameActor.h"
 
-dae::RenderComponent::RenderComponent(GameObject* pOwner)
+dae::RenderComponent::RenderComponent(GameActor* pOwner)
 	: BaseComponent(pOwner), m_pTexture{ nullptr }
 {}
 

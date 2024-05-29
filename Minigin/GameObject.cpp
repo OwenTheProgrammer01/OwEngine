@@ -1,11 +1,11 @@
 #include <string>
 
-#include "GameObject.h"
+#include "GameActor.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
 #include "RenderComponent.h"
 
-void dae::GameObject::Update()
+void dae::GameActor::Update()
 {
 	for (const auto& component : m_pComponents)
 	{
@@ -13,7 +13,7 @@ void dae::GameObject::Update()
 	}
 }
 
-void dae::GameObject::Render() const
+void dae::GameActor::Render() const
 {
 	for (const auto& component : m_pComponents)
 	{
@@ -21,7 +21,7 @@ void dae::GameObject::Render() const
 	}
 }
 
-void dae::GameObject::SetParent(GameObject* pParent, bool keepWorldPos)
+void dae::GameActor::SetParent(GameActor* pParent, bool keepWorldPos)
 {
 	if (IsChild(pParent) || pParent == this || m_pParent == pParent)
 		return;
@@ -43,33 +43,33 @@ void dae::GameObject::SetParent(GameObject* pParent, bool keepWorldPos)
 		m_pParent->AddChild(this);
 }
 
-dae::GameObject* dae::GameObject::GetChild(size_t idx)
+dae::GameActor* dae::GameActor::GetChild(size_t idx)
 {
 	assert(idx < GetChildCount());
 	return m_pChildren[idx];
 }
 
-void dae::GameObject::SetLocalPosition(const glm::vec3& pos)
+void dae::GameActor::SetLocalPosition(const glm::vec3& pos)
 {
 	m_LocalPos.SetPosition(pos.x, pos.y, pos.z);
 	SetPosDirty();
 }
 
-void dae::GameObject::SetWorldPosition(float x, float y)
+void dae::GameActor::SetWorldPosition(float x, float y)
 {
 	if (!m_pParent)
 		m_LocalPos.SetPosition(x, y, 0);
 	SetPosDirty();
 }
 
-const glm::vec3& dae::GameObject::GetWorldPosition()
+const glm::vec3& dae::GameActor::GetWorldPosition()
 {
 	if (m_PosIsDirty)
 		UpdateWorldPosition();
 	return m_WorldPos;
 }
 
-void dae::GameObject::SetPosDirty()
+void dae::GameActor::SetPosDirty()
 {
 	m_PosIsDirty = true;
 
@@ -79,7 +79,7 @@ void dae::GameObject::SetPosDirty()
 	}
 }
 
-void dae::GameObject::SetDeleteFlag()
+void dae::GameActor::SetDeleteFlag()
 {
 	m_DeleteFlag = true;
 
@@ -89,7 +89,7 @@ void dae::GameObject::SetDeleteFlag()
 	}
 }
 
-void dae::GameObject::UpdateWorldPosition()
+void dae::GameActor::UpdateWorldPosition()
 {
 	if (m_PosIsDirty)
 	{
@@ -101,19 +101,19 @@ void dae::GameObject::UpdateWorldPosition()
 	m_PosIsDirty = false;
 }
 
-void dae::GameObject::AddChild(GameObject* pChild)
+void dae::GameActor::AddChild(GameActor* pChild)
 {
 	m_pChildren.emplace_back(pChild);
 }
 
-void dae::GameObject::RemoveChild(GameObject* pChild)
+void dae::GameActor::RemoveChild(GameActor* pChild)
 {
 	auto it = std::find(m_pChildren.begin(), m_pChildren.end(), pChild);
 	if (it != m_pChildren.end())
 		m_pChildren.erase(it);
 }
 
-bool dae::GameObject::IsChild(GameObject* pOwner) const
+bool dae::GameActor::IsChild(GameActor* pOwner) const
 {
 	return std::find(m_pChildren.begin(), m_pChildren.end(), pOwner) != end(m_pChildren);
 }

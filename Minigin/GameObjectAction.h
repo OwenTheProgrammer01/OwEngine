@@ -1,6 +1,6 @@
 #pragma once
 #include "Action.h"
-#include "GameObject.h"
+#include "GameActor.h"
 #include <iostream>
 
 namespace dae
@@ -8,17 +8,17 @@ namespace dae
 	class GameObjectAction : public Action
 	{
 	protected:
-		GameObject* GetGameObject() const { return m_pOwner; }
+		GameActor* GetGameObject() const { return m_pOwner; }
 	public:
-		GameObjectAction(GameObject* pOwner) : m_pOwner(pOwner) {}
+		GameObjectAction(GameActor* pOwner) : m_pOwner(pOwner) {}
 		virtual ~GameObjectAction() = default;
 	private:
-		GameObject* m_pOwner;
+		GameActor* m_pOwner;
 	};
 
 	class Movement final : public GameObjectAction {
 	public:
-		Movement(GameObject* pOwner) : GameObjectAction(pOwner) {}
+		Movement(GameActor* pOwner) : GameObjectAction(pOwner) {}
 		void Execute() override
 		{
 			std::cout << "Move" << std::endl;
@@ -28,7 +28,7 @@ namespace dae
 
 	class Aim final : public GameObjectAction {
 	public:
-		Aim(GameObject* pOwner) : GameObjectAction(pOwner) {}
+		Aim(GameActor* pOwner) : GameObjectAction(pOwner) {}
 		void Execute() override
 		{
 			std::cout << "Aim" << std::endl;
@@ -37,7 +37,7 @@ namespace dae
 
 	class Shoot final : public GameObjectAction {
 	public:
-		Shoot(GameObject* pOwner) : GameObjectAction(pOwner) {}
+		Shoot(GameActor* pOwner) : GameObjectAction(pOwner) {}
 		void Execute() override
 		{
 			std::cout << "Shoot" << std::endl;

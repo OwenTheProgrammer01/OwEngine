@@ -3,11 +3,11 @@
 #include <cassert>
 
 #include "FPSComponent.h"
-#include "GameObject.h"
+#include "GameActor.h"
 #include "TextComponent.h"
 #include "GameTime.h"
 
-dae::FPSComponent::FPSComponent(GameObject* pOwner)
+dae::FPSComponent::FPSComponent(GameActor* pOwner)
     : BaseComponent(pOwner), m_AccumulatedTime{ 0.f }, m_FrameCount{ 0 }, m_pTextComp{ pOwner->GetComponent<dae::TextComponent>() }
 {
     assert(m_pTextComp);

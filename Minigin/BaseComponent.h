@@ -2,7 +2,7 @@
 
 namespace dae
 {
-    class GameObject;
+    class GameActor;
     class BaseComponent
     {
     public:
@@ -16,9 +16,9 @@ namespace dae
         BaseComponent& operator=(const BaseComponent& other) = delete;
         BaseComponent& operator=(BaseComponent&& other) = delete;
     private:
-        GameObject* m_pOwner;
+        GameActor* m_pOwner;
     protected:
-        explicit BaseComponent(GameObject* pOwner) : m_pOwner(pOwner) {}
-        GameObject* GetOwner() const { return m_pOwner; }
+        explicit BaseComponent(GameActor* pOwner) : m_pOwner(pOwner) {}
+        GameActor* GetOwner() const { return m_pOwner; }
     };
 }

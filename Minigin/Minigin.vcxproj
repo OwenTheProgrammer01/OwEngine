@@ -207,7 +207,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="FPSComponent.h" />
     <ClInclude Include="GameObjectAction.h" />
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameActor.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Minigin.h" />

@@ -3,7 +3,7 @@
 #include <memory>
 
 #include "BaseComponent.h"
-#include "GameObject.h"
+#include "GameActor.h"
 
 namespace dae
 {
@@ -16,7 +16,7 @@ namespace dae
 
 		void SetText(const std::string& text);
 
-		TextComponent(GameObject* pOwner, std::shared_ptr<Font> font);
+		TextComponent(GameActor* pOwner, std::shared_ptr<Font> font);
 		virtual ~TextComponent() = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;

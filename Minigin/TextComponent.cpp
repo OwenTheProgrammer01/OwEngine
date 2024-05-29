@@ -8,7 +8,7 @@
 #include "RenderComponent.h"
 #include "Texture2D.h"
 
-dae::TextComponent::TextComponent(GameObject* pOwner, std::shared_ptr<Font> font)
+dae::TextComponent::TextComponent(GameActor* pOwner, std::shared_ptr<Font> font)
 	: BaseComponent(pOwner), m_needsUpdate{ true }, m_text{ " " }, m_pFont{ std::move(font) }, m_pRenderComponent{ pOwner->GetComponent<RenderComponent>() }
 {
 	assert(m_pRenderComponent);

@@ -4,19 +4,19 @@
 
 namespace dae
 {
-	class GameObject;
+	class GameActor;
 
 	class Transform final
 	{
 	public:
-		Transform(GameObject* pGameObject);
+		Transform(GameActor* pGameObject);
 
 		void SetPosition(float x, float y, float z);
 		const glm::vec3& GetPosition() const { return m_position; }
 
 		void Rotate(float angle, const glm::vec3& axis, bool rotateAroundParent = true, const glm::vec3& rotPoint = {});
 	private:
-		GameObject* m_pGameObject;
+		GameActor* m_pGameObject;
 		glm::vec3 m_position;
 	};
 }

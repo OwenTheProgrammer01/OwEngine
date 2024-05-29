@@ -3,14 +3,14 @@
 
 namespace dae
 {
-	class GameObject;
+	class GameActor;
 	class TextComponent;
 	class FPSComponent : public BaseComponent
 	{
 	public:
 		void Update() override;
 
-		FPSComponent(GameObject* pOwner);
+		FPSComponent(GameActor* pOwner);
 		virtual ~FPSComponent() = default;
 		FPSComponent(const FPSComponent& other) = delete;
 		FPSComponent(FPSComponent&& other) = delete;

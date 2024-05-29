@@ -13,9 +13,12 @@ namespace dae
 	template<typename T>
 	concept ComponentConcept = std::is_base_of_v<BaseComponent, T>;
 
-	class GameObject final
+	class GameActor final
 	{
 	public:
+		GameActor() = default;
+		virtual ~GameActor() = default;
+
 		virtual void Update();
 		virtual void Render() const;
 		
@@ -53,10 +56,10 @@ namespace dae
 		// ----------------------------------
 
 		// ----------- Scene Graph -----------
-		void SetParent(GameObject* pParent, bool keepWorldPos = false);
-		GameObject* GetParent() const { return m_pParent; }
+		void SetParent(GameActor* pParent, bool keepWorldPos = false);
+		GameActor* GetParent() const { return m_pParent; }
 		size_t GetChildCount() { return m_pChildren.size(); }
-		GameObject* GetChild(size_t idx);
+		GameActor* GetChild(size_t idx);
 
 		void SetLocalPosition(const glm::vec3& pos);
 		const Transform& GetTransform() { return m_LocalPos; }
@@ -69,17 +72,15 @@ namespace dae
 		void SetDeleteFlag();
 		bool GetDeleteFlag() const { return m_DeleteFlag; }
 
-		GameObject() = default;
-		virtual ~GameObject() = default;
-		GameObject(const GameObject& other) = delete;
-		GameObject(GameObject&& other) = delete;
-		GameObject& operator=(const GameObject& other) = delete;
-		GameObject& operator=(GameObject&& other) = delete;
+		GameActor(const GameActor& other) = delete;
+		GameActor(GameActor&& other) = delete;
+		GameActor& operator=(const GameActor& other) = delete;
+		GameActor& operator=(GameActor&& other) = delete;
 	private:
-		GameObject* m_pParent;
+		GameActor* m_pParent;
 
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
-		std::vector<GameObject*> m_pChildren;
+		std::vector<GameActor*> m_pChildren;
 
 		Transform m_LocalPos{ this };
 		glm::vec3 m_WorldPos{};
@@ -90,8 +91,8 @@ namespace dae
 
 		void UpdateWorldPosition();
 
-		void AddChild(GameObject* pChild);
-		void RemoveChild(GameObject* pChild);
-		bool IsChild(GameObject* pOwner) const;
+		void AddChild(GameActor* pChild);
+		void RemoveChild(GameActor* pChild);
+		bool IsChild(GameActor* pOwner) const;
 	};
 }

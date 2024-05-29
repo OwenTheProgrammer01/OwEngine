@@ -3,23 +3,21 @@
 #include <string>
 #include <functional>
 #include <map>
+#include "GameActor.h"
 
 namespace dae
 {
-	class Observer final
+	class Observer
 	{
 	public:
 		Observer() = default;
-		~Observer() = default;
+		virtual ~Observer() = default;
+
+		virtual void Notify(Event event, GameActor* actor) = 0;
 
 		Observer(const Observer&) = delete;
 		Observer(Observer&&) = delete;
 		Observer& operator=(const Observer&) = delete;
 		Observer& operator=(const Observer&&) = delete;
-
-		//void RegisterForEvent(std::weak_ptr<Observer> pObs, const std::string& eventName, std::function<void(const Event& event)> fCallback)
-		//{
-		//	EventManager::GetInstance().RegisterObserver(pObs, fCallback, eventName);
-		//}
 	};
 }
