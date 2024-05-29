@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "Transform.h"
-#include "GameObject.h"
+#include "GameActor.h"
 
 dae::Transform::Transform(GameActor* pGameObj) :
 	m_position{}, m_pGameObject{ pGameObj }

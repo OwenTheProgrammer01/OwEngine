@@ -12,17 +12,18 @@ namespace dae
     class EventManager final : public Singleton<EventManager>
     {
     public:
+        EventManager() = default;
+        ~EventManager() = default;
+
         void ProcessEventQueue();
 
         void BroadcastEvent(std::unique_ptr<Event> event);
         void BroadcastBlockingEvent(std::unique_ptr<Event> event);
 
-        std::shared_ptr<Observer> CreateObserver() const { return std::make_shared<Observer>(); }
+        //std::shared_ptr<Observer> CreateObserver() const { return std::make_shared<Observer>(); }
 
         void RemoveEvent(const std::string& eventName);
 
-        EventManager() = default;
-        ~EventManager() = default;
         EventManager(const EventManager&) = delete;
         EventManager(EventManager&&) = delete;
         EventManager& operator=(const EventManager&) = delete;

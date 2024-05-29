@@ -4,7 +4,7 @@
 #include "TextComponent.h"
 #include "Renderer.h"
 #include "Font.h"
-#include "GameObject.h"
+#include "GameActor.h"
 #include "RenderComponent.h"
 #include "Texture2D.h"
 
