@@ -4,17 +4,20 @@
 #include "Transform.h"
 #include "GameActor.h"
 
-dae::Transform::Transform(GameActor* pGameObj) :
-	m_position{}, m_pGameObject{ pGameObj }
+dae::Transform::Transform(GameActor* pOwner)
+	: m_pActor(pOwner), m_LocalPos(), m_WorldPos(), m_Rotation(), m_Scale()
 {
-	assert(m_pGameObject);
+	assert(m_pActor);
 }
 
-void dae::Transform::SetPosition(const float x, const float y, const float z)
+void dae::Transform::SetWorldPosition(const glm::vec3 worldPos)
 {
-	m_position.x = x;
-	m_position.y = y;
-	m_position.z = z;
+    m_WorldPos = worldPos;
+}
+
+void dae::Transform::SetLocalPosition(const glm::vec3 localPos)
+{
+	m_LocalPos = localPos;
 }
 
 void dae::Transform::Rotate(float angle, const glm::vec3& axis, bool rotateAroundParent, const glm::vec3& rotPoint)
@@ -27,7 +30,7 @@ void dae::Transform::Rotate(float angle, const glm::vec3& axis, bool rotateAroun
     if (rotateAroundParent)
     {
         rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(angle), axis);
-        rotatedOffset = rotationMatrix * glm::vec4(m_position, 1.0f);
+        rotatedOffset = rotationMatrix * glm::vec4(m_LocalPos, 1.0f);
     }
     else
     {
@@ -35,9 +38,9 @@ void dae::Transform::Rotate(float angle, const glm::vec3& axis, bool rotateAroun
         glm::mat4 reverseTranslationMatrix = glm::translate(glm::mat4(1.0f), rotPoint);
 
         rotationMatrix = reverseTranslationMatrix * glm::rotate(glm::mat4(1.0f), glm::radians(angle), axis) * translationMatrix;
-        rotatedOffset = rotationMatrix * glm::vec4(m_position, 1.0f);
+        rotatedOffset = rotationMatrix * glm::vec4(m_LocalPos, 1.0f);
     }
 
-    m_position = glm::vec3(rotatedOffset);
-    m_pGameObject->SetPosDirty();
+    m_LocalPos = glm::vec3(rotatedOffset);
+    m_pActor->SetPosDirty();
 }

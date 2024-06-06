@@ -13,7 +13,7 @@ namespace dae
 		Observer() = default;
 		virtual ~Observer() = default;
 
-		virtual void Notify(GameActor* actor, Event event) = 0;
+		virtual void Notify(Event event, GameActor* actor) = 0;
 
 		Observer(const Observer&) = delete;
 		Observer(Observer&&) = delete;

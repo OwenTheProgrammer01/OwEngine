@@ -23,55 +23,36 @@ void dae::GameActor::Render() const
 
 void dae::GameActor::SetParent(GameActor* pParent, bool keepWorldPos)
 {
-	if (IsChild(pParent) || pParent == this || m_pParent == pParent)
-		return;
-	if (pParent == nullptr)
-		SetLocalPosition(GetWorldPosition());
+	if (IsChild(pParent) || pParent == this || m_pParent == pParent) return;
+	if (pParent == nullptr)	SetLocalPosition(GetWorldPosition());
 	else
 	{
-		if (keepWorldPos)
-		{
-			SetLocalPosition(GetWorldPosition() - pParent->GetWorldPosition());
-			SetPosDirty();
-		}
+		if (keepWorldPos) SetLocalPosition(GetWorldPosition() - pParent->GetWorldPosition());
+		SetPosDirty();
 	}
-
-	if (m_pParent)
-		m_pParent->RemoveChild(this);
+	if (m_pParent) m_pParent->RemoveChild(this);
 	m_pParent = pParent;
-	if (m_pParent) 
-		m_pParent->AddChild(this);
+	if (m_pParent) m_pParent->AddChild(this);
 }
 
-dae::GameActor* dae::GameActor::GetChild(size_t idx)
+void dae::GameActor::SetWorldPosition(const glm::vec3& worldPos)
 {
-	assert(idx < GetChildCount());
-	return m_pChildren[idx];
-}
-
-void dae::GameActor::SetLocalPosition(const glm::vec3& pos)
-{
-	m_LocalPos.SetPosition(pos.x, pos.y, pos.z);
+	if (!m_pParent)	
+	{
+		SetLocalPosition(worldPos);
+	}
 	SetPosDirty();
 }
 
-void dae::GameActor::SetWorldPosition(float x, float y)
+void dae::GameActor::SetLocalPosition(const glm::vec3& localPos)
 {
-	if (!m_pParent)
-		m_LocalPos.SetPosition(x, y, 0);
+	m_Transform.SetLocalPosition(localPos);
 	SetPosDirty();
-}
-
-const glm::vec3& dae::GameActor::GetWorldPosition()
-{
-	if (m_PosIsDirty)
-		UpdateWorldPosition();
-	return m_WorldPos;
 }
 
 void dae::GameActor::SetPosDirty()
 {
-	m_PosIsDirty = true;
+	m_IsPosDirty = true;
 
 	for (const auto& child : m_pChildren)
 	{
@@ -89,18 +70,6 @@ void dae::GameActor::SetDeleteFlag()
 	}
 }
 
-void dae::GameActor::UpdateWorldPosition()
-{
-	if (m_PosIsDirty)
-	{
-		if (m_pParent == nullptr)
-			m_WorldPos = m_LocalPos.GetPosition();
-		else
-			m_WorldPos = m_pParent->GetWorldPosition() + m_LocalPos.GetPosition();
-	}
-	m_PosIsDirty = false;
-}
-
 void dae::GameActor::AddChild(GameActor* pChild)
 {
 	m_pChildren.emplace_back(pChild);
@@ -109,11 +78,20 @@ void dae::GameActor::AddChild(GameActor* pChild)
 void dae::GameActor::RemoveChild(GameActor* pChild)
 {
 	auto it = std::find(m_pChildren.begin(), m_pChildren.end(), pChild);
-	if (it != m_pChildren.end())
-		m_pChildren.erase(it);
+	if (it != m_pChildren.end()) m_pChildren.erase(it);
 }
 
 bool dae::GameActor::IsChild(GameActor* pOwner) const
 {
 	return std::find(m_pChildren.begin(), m_pChildren.end(), pOwner) != end(m_pChildren);
+}
+
+void dae::GameActor::UpdateWorldPosition()
+{
+	if (m_IsPosDirty)
+	{
+		if (m_pParent == nullptr) m_Transform.SetWorldPosition(m_Transform.GetLocalPosition());
+		else m_Transform.SetWorldPosition(m_pParent->GetWorldPosition() + m_Transform.GetLocalPosition());
+	}
+	m_IsPosDirty = false;
 }

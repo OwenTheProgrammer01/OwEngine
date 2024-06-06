@@ -59,12 +59,16 @@ namespace dae
 		void SetParent(GameActor* pParent, bool keepWorldPos = false);
 		GameActor* GetParent() const { return m_pParent; }
 		size_t GetChildCount() { return m_pChildren.size(); }
-		GameActor* GetChild(size_t idx);
+		GameActor* GetChildAt(unsigned int index) const { return m_pChildren[index]; }
 
+		void SetWorldPosition(const glm::vec3& pos);
+		const glm::vec3& GetWorldPosition()
+		{
+			if (m_IsPosDirty) UpdateWorldPosition();
+			return m_Transform.GetWorldPosition();
+		}
 		void SetLocalPosition(const glm::vec3& pos);
-		const Transform& GetTransform() { return m_LocalPos; }
-		void SetWorldPosition(float x, float y);
-		const glm::vec3& GetWorldPosition();
+		const glm::vec3& GetLocalPosition() { return m_Transform.GetLocalPosition(); }
 
 		void SetPosDirty();
 		// -----------------------------------
@@ -77,22 +81,21 @@ namespace dae
 		GameActor& operator=(const GameActor& other) = delete;
 		GameActor& operator=(GameActor&& other) = delete;
 	private:
-		GameActor* m_pParent;
-
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
+
+		GameActor* m_pParent{};
 		std::vector<GameActor*> m_pChildren;
 
-		Transform m_LocalPos{ this };
-		glm::vec3 m_WorldPos{};
+		Transform m_Transform{ this };
 
-		bool m_PosIsDirty = false;
+		bool m_IsPosDirty = false;
 
 		bool m_DeleteFlag = false;
-
-		void UpdateWorldPosition();
 
 		void AddChild(GameActor* pChild);
 		void RemoveChild(GameActor* pChild);
 		bool IsChild(GameActor* pOwner) const;
+
+		void UpdateWorldPosition();
 	};
 }
