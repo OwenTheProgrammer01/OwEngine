@@ -28,18 +28,21 @@
     <Filter Include="Actions">
       <UniqueIdentifier>{72be8bf6-e317-4c3c-b6c0-0b361908a28c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Event Manager">
-      <UniqueIdentifier>{ff87e295-f98c-4bca-b0d2-e1d715cc7b4d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SoundSystem">
       <UniqueIdentifier>{b7ce86d2-3c55-4507-a328-59b451358516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{b6556ae2-acbe-47b9-b7be-826d86d4dc82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{ff87e295-f98c-4bca-b0d2-e1d715cc7b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameActor">
+      <UniqueIdentifier>{c7f76665-b967-4379-a947-c8c920fbe860}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
@@ -48,13 +51,7 @@
     <ClInclude Include="Texture2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameActor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
@@ -126,39 +123,39 @@
     <ClInclude Include="Keyboard.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="EventManager.h">
-      <Filter>Event Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Observer.h">
-      <Filter>Event Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>Components</Filter>
+      <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="Event.h">
-      <Filter>Event Manager</Filter>
+      <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="SoundSystem.h">
       <Filter>SoundSystem</Filter>
     </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameActor.h">
+      <Filter>GameActor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Texture2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
@@ -215,14 +212,23 @@
     <ClCompile Include="Keyboard.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="EventManager.cpp">
-      <Filter>Event Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="SoundSystem.cpp">
       <Filter>SoundSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="GameActor.cpp">
+      <Filter>GameActor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
