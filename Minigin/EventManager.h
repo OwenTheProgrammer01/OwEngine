@@ -1,24 +1,29 @@
 #pragma once
+#include <memory>
 #include <queue>
 #include <map>
 #include <functional>
 
 #include "Singleton.h"
 #include "Event.h"
-#include "Observer.h"
 
 namespace dae
 {
+
     class EventManager final : public Singleton<EventManager>
     {
     public:
+        using EventHandler = std::function<void()>;
+
         EventManager() = default;
         ~EventManager() = default;
 
         void ProcessEventQueue();
 
-        void PlaceEventOnQueue(std::unique_ptr<Event> event);
+        void AddEventOnQueue(std::unique_ptr<Event> pEvent);
         void RemoveEvent(const std::string& eventName);
+
+        void RegisterHandler(const std::string& eventName, EventHandler handler);
 
         EventManager(const EventManager&) = delete;
         EventManager(EventManager&&) = delete;
@@ -27,13 +32,9 @@ namespace dae
     private:
         friend class Singleton<EventManager>;
 
-        friend class Observer;
-        using fEventCallback = std::function<void(const Event&)>;
-        void RegisterObserver(std::weak_ptr<Observer> pObserver, fEventCallback fCallback, const std::string& eventName);
-        void HandleEvent(Event* event);
+        void HandleEvent(Event* pEvent);
 
-        using ObserverCallback = std::vector<std::pair<std::weak_ptr<Observer>, fEventCallback>>;
-        std::map<std::string, ObserverCallback> m_EventCallbacks;
+        std::map<std::string, EventHandler> m_EventHandlers;
 
         std::queue<std::unique_ptr<Event>> m_EventQueue;
     };

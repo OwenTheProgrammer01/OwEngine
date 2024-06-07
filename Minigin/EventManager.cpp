@@ -9,42 +9,27 @@ void dae::EventManager::ProcessEventQueue()
 	}
 }
 
-void dae::EventManager::PlaceEventOnQueue(std::unique_ptr<Event> event)
+void dae::EventManager::AddEventOnQueue(std::unique_ptr<Event> pEvent)
 {
-	m_EventQueue.emplace(std::move(event));
+	m_EventQueue.emplace(std::move(pEvent));
 }
 
 void dae::EventManager::RemoveEvent(const std::string& eventName)
 {
-	m_EventCallbacks.erase(eventName);
+	m_EventHandlers.erase(eventName);
 }
 
-void dae::EventManager::RegisterObserver(std::weak_ptr<Observer> pObserver, fEventCallback fCallback, const std::string& eventName)
+void dae::EventManager::RegisterHandler(const std::string& eventName, EventHandler handler)
 {
-	auto& CreateObserver{ m_EventCallbacks[eventName] };
-	CreateObserver.emplace_back(pObserver, fCallback);
+	m_EventHandlers[eventName] = handler;
 }
 
-void dae::EventManager::HandleEvent(Event* event)
+void dae::EventManager::HandleEvent(Event* pEvent)
 {
-	const auto& eventName{ event->GetEventName() };
+	const auto& eventName{ pEvent->GetEventName() };
 
-	auto it{ m_EventCallbacks.find(eventName) };
-
-	if (it != m_EventCallbacks.end())
+	if (m_EventHandlers.find(eventName) != m_EventHandlers.end()) 
 	{
-		auto& ObserverCallback{ it->second };
-
-		std::erase_if(ObserverCallback, [](const auto& pair)
-			{
-				return pair.first.expired();
-			});
-
-		for (const auto& [pObserver, fCallback] : ObserverCallback)
-		{
-			fCallback(*event);
-		}
-
-		return;
+		m_EventHandlers[eventName]();
 	}
 }

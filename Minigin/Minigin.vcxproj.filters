@@ -19,9 +19,6 @@
     <Filter Include="ImGui">
       <UniqueIdentifier>{68bfc0ab-1384-44f2-ab63-85e52230fc03}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{bd7c7e36-f176-415e-aa46-cb1607130d73}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{e39ef6a0-64d4-4a4c-bf82-d725d4fc5df6}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,9 @@
     </Filter>
     <Filter Include="GameActor">
       <UniqueIdentifier>{c7f76665-b967-4379-a947-c8c920fbe860}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Basic Components">
+      <UniqueIdentifier>{bd7c7e36-f176-415e-aa46-cb1607130d73}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,16 +100,16 @@
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="FPSComponent.h">
-      <Filter>Components</Filter>
+      <Filter>Basic Components</Filter>
     </ClInclude>
     <ClInclude Include="BaseComponent.h">
-      <Filter>Components</Filter>
+      <Filter>Basic Components</Filter>
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
-      <Filter>Components</Filter>
+      <Filter>Basic Components</Filter>
     </ClInclude>
     <ClInclude Include="TextComponent.h">
-      <Filter>Components</Filter>
+      <Filter>Basic Components</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Input</Filter>
@@ -122,9 +122,6 @@
     </ClInclude>
     <ClInclude Include="Keyboard.h">
       <Filter>Input</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="Event.h">
       <Filter>Event</Filter>
@@ -146,6 +143,9 @@
     </ClInclude>
     <ClInclude Include="GameActor.h">
       <Filter>GameActor</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveComponent.h">
+      <Filter>Basic Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -195,13 +195,13 @@
       <Filter>My ImGui Widgets</Filter>
     </ClCompile>
     <ClCompile Include="FPSComponent.cpp">
-      <Filter>Components</Filter>
+      <Filter>Basic Components</Filter>
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
-      <Filter>Components</Filter>
+      <Filter>Basic Components</Filter>
     </ClCompile>
     <ClCompile Include="TextComponent.cpp">
-      <Filter>Components</Filter>
+      <Filter>Basic Components</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Input</Filter>
@@ -229,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="GameActor.cpp">
       <Filter>GameActor</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveComponent.cpp">
+      <Filter>Basic Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

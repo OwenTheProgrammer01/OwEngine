@@ -1,8 +1,11 @@
 #include "SceneManager.h"
 #include "Scene.h"
+#include "EventManager.h"
 
 void dae::SceneManager::Update()
 {
+	EventManager::GetInstance().ProcessEventQueue();
+
 	for(auto& scene : m_scenes)
 	{
 		scene->Update();
