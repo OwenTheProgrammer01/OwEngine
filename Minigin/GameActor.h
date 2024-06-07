@@ -62,14 +62,12 @@ namespace dae
 		GameActor* GetChildAt(unsigned int index) const { return m_pChildren[index]; }
 
 		void SetWorldPosition(const glm::vec3& pos);
-		const glm::vec3& GetWorldPosition()
-		{
-			if (m_IsPosDirty) UpdateWorldPosition();
-			return m_Transform.GetWorldPosition();
-		}
+		const glm::vec3 GetWorldPosition();
 		void SetLocalPosition(const glm::vec3& pos);
-		const glm::vec3& GetLocalPosition() { return m_Transform.GetLocalPosition(); }
-
+		const glm::vec3 GetLocalPosition();
+		void Rotate(const float angle);
+		void LookAt(const glm::vec3& target);
+		void LookAt(const float angle);
 		void SetPosDirty();
 		// -----------------------------------
 
@@ -86,7 +84,7 @@ namespace dae
 		GameActor* m_pParent{};
 		std::vector<GameActor*> m_pChildren;
 
-		Transform m_Transform{ this };
+		Transform m_Transform;
 
 		bool m_IsPosDirty = false;
 

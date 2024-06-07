@@ -2,14 +2,15 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include "BaseComponent.h"
+
 namespace dae
 {
 	class GameActor;
-
 	class Transform final
 	{
 	public:
-		Transform(GameActor* pOwner);
+		Transform();
 		virtual ~Transform() = default;
 
 		void SetWorldPosition(const glm::vec3 worldPos);
@@ -17,18 +18,18 @@ namespace dae
 		void SetLocalPosition(const glm::vec3 localPos);
 		const glm::vec3& GetLocalPosition() const { return m_LocalPos; }
 
-		void Rotate(float angle, const glm::vec3& axis, bool rotateAroundParent = true, const glm::vec3& rotPoint = {});
+		void Rotate(const float angle);
+		void LookAt(const glm::vec3& target);
+		void LookAt(const float angle);
 
 		Transform(const Transform&) = delete;
 		Transform(Transform&&) = delete;
 		Transform& operator=(const Transform&) = delete;
 		Transform& operator=(const Transform&&) = delete;
 	private:
-		GameActor* m_pActor;
-
 		glm::vec3 m_LocalPos;
 		glm::vec3 m_WorldPos;
-		glm::vec3 m_Rotation;
+		glm::vec3 m_LookAt;
 		glm::vec3 m_Scale;
 	};
 }

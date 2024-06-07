@@ -7,6 +7,8 @@
 
 void dae::GameActor::Update()
 {
+	if (m_DeleteFlag) return;
+
 	for (const auto& component : m_pComponents)
 	{
 		component->Update();
@@ -44,16 +46,43 @@ void dae::GameActor::SetWorldPosition(const glm::vec3& worldPos)
 	SetPosDirty();
 }
 
+const glm::vec3 dae::GameActor::GetWorldPosition()
+{
+	if (m_IsPosDirty) UpdateWorldPosition();
+	if (m_pParent != nullptr) return m_pParent->GetWorldPosition() + GetLocalPosition();
+	return m_Transform.GetWorldPosition();
+}
+
 void dae::GameActor::SetLocalPosition(const glm::vec3& localPos)
 {
 	m_Transform.SetLocalPosition(localPos);
 	SetPosDirty();
 }
 
+const glm::vec3 dae::GameActor::GetLocalPosition()
+{
+	return m_Transform.GetLocalPosition();
+}
+
+void dae::GameActor::Rotate(float angle)
+{
+	m_Transform.Rotate(angle);
+	SetPosDirty();
+}
+
+void dae::GameActor::LookAt(const glm::vec3& target)
+{
+	m_Transform.LookAt(target);
+}
+
+void dae::GameActor::LookAt(const float angle)
+{
+	m_Transform.LookAt(angle);
+}
+
 void dae::GameActor::SetPosDirty()
 {
 	m_IsPosDirty = true;
-
 	for (const auto& child : m_pChildren)
 	{
 		child->SetPosDirty();
