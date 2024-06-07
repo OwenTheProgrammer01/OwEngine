@@ -14,7 +14,6 @@ public:
 
 	void ProcessInput();
 
-	unsigned int GetButtonCode(Buttons button) const;
 	bool IsPressed(unsigned int button) const { return m_CurrentState.Gamepad.wButtons & button; }
 	bool IsPressedThisFrame(unsigned int button) const { return m_ButtonsPressedThisFrame & button; }
 	bool IsReleasedThisFrame(unsigned int button) const { return m_ButtonsReleasedThisFrame & button; }
@@ -26,7 +25,7 @@ private:
 };
 
 dae::Controller::ControllerImpl::ControllerImpl(int controllerIndex)
-	: m_CurrentState{}, m_ButtonsPressedThisFrame{}, m_ButtonsReleasedThisFrame{}, m_ControllerIndex{ static_cast<DWORD>(controllerIndex) }
+	: m_CurrentState(), m_ButtonsPressedThisFrame(), m_ButtonsReleasedThisFrame(), m_ControllerIndex(static_cast<DWORD>(controllerIndex))
 {}
 
 void dae::Controller::ControllerImpl::ProcessInput()
@@ -54,35 +53,8 @@ void dae::Controller::ControllerImpl::ProcessInput()
 	}*/
 }
 
-unsigned int dae::Controller::ControllerImpl::GetButtonCode(Buttons button) const
-{
-	switch (button)
-	{
-	case Buttons::DPadUp:			return 0x0001;
-	case Buttons::DPadDown:			return 0x0002;
-	case Buttons::DPadLeft:			return 0x0004;
-	case Buttons::DPadRight:		return 0x0008;
-
-	case Buttons::Start:			return 0x0010;
-	case Buttons::Back:				return 0x0020;
-
-	case Buttons::LeftThumb:		return 0x0040;
-	case Buttons::RightThumb:		return 0x0080;
-
-	case Buttons::LeftShoulder:		return 0x0100;
-	case Buttons::RightShoulder:	return 0x0200;
-
-	case Buttons::A:				return 0x1000;
-	case Buttons::B:				return 0x2000;
-	case Buttons::X:				return 0x4000;
-	case Buttons::Y:				return 0x8000;
-
-	default:						return 0x0000;
-	}
-}
-
 dae::Controller::Controller(int controllerIndex)
-	: Device{}, m_UserIndex(controllerIndex), m_pImpl(std::make_unique<ControllerImpl>(controllerIndex))
+	: Device(), m_UserIndex(controllerIndex), m_pImpl(std::make_unique<ControllerImpl>(controllerIndex))
 {}
 
 dae::Controller::~Controller() = default;
@@ -95,28 +67,23 @@ void dae::Controller::ProcessInput()
 void dae::Controller::ProcessActions(std::map<State, std::map<Buttons, std::shared_ptr<Action>>> controllerCommands)
 {
 	for (const auto& map : controllerCommands[State::IsPressed]) {
-		if (IsPressed(GetButtonCode(map.first)))
+		if (IsPressed(static_cast<unsigned int>(map.first)))
 		{
 			map.second->Execute();
 		}
 	}
 	for (const auto& map : controllerCommands[State::IsPressedThisFrame]) {
-		if (IsPressedThisFrame(GetButtonCode(map.first)))
+		if (IsPressedThisFrame(static_cast<unsigned int>(map.first)))
 		{
 			map.second->Execute();
 		}
 	}
 	for (const auto& map : controllerCommands[State::IsReleasedThisFrame]) {
-		if (IsReleasedThisFrame(GetButtonCode(map.first)))
+		if (IsReleasedThisFrame(static_cast<unsigned int>(map.first)))
 		{
 			map.second->Execute();
 		}
 	}
-}
-
-unsigned int dae::Controller::GetButtonCode(Buttons button) const
-{
-	return m_pImpl->GetButtonCode(button);
 }
 
 bool dae::Controller::IsPressed(unsigned int button) const

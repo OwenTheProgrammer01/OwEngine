@@ -6,7 +6,7 @@
 #include "Singleton.h"
 #include "Controller.h"
 #include "Keyboard.h"
-#include "GameObjectAction.h"
+#include "GameActorAction.h"
 
 namespace dae
 {

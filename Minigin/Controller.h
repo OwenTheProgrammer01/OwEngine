@@ -1,4 +1,6 @@
 #pragma once
+#include <glm/glm.hpp>
+
 #include "Device.h"
 
 namespace dae
@@ -6,32 +8,34 @@ namespace dae
     enum class Buttons
     {
         //--- Digital ---
-        DPadUp,		        // (Xbox) --> Up Arrow (Playstation)
-        DPadDown,	        // (Xbox) --> Down Arrow (Playstation)
-        DPadLeft,	        // (Xbox) --> Left Arrow (Playstation)
-        DPadRight,          // (Xbox) --> Right Arrow (Playstation)
+        Default         = 0x0000,   // (Xbox) --> (Playstation)
 
-        Start,	            // (Xbox) --> Options (Playstation)
-        Back,	            // (Xbox) --> Share (Playstation)
+        DPadUp          = 0x0001,   // (Xbox) --> Up Arrow (Playstation)
+        DPadDown        = 0x0002,   // (Xbox) --> Down Arrow (Playstation)
+        DPadLeft        = 0x0004,   // (Xbox) --> Left Arrow (Playstation)
+        DPadRight       = 0x0008,   // (Xbox) --> Right Arrow (Playstation)
 
-        LeftThumb,	        // (Xbox) --> LeftThumb (Playstation)
-        RightThumb,	        // (Xbox) --> RightThumb (Playstation)
+        Start           = 0x0010,   // (Xbox) --> Options (Playstation)
+        Back            = 0x0020,   // (Xbox) --> Share (Playstation)
 
-        LeftShoulder,	    // (Xbox) --> LeftShoulder (Playstation)
-        RightShoulder,	    // (Xbox) --> RightShoulder (Playstation)
+        LeftThumb       = 0x0040,   // (Xbox) --> LeftThumb (Playstation)
+        RightThumb      = 0x0080,   // (Xbox) --> RightThumb (Playstation)
 
-        A,                  // (Xbox) --> Cross (Playstation)
-        B,                  // (Xbox) --> Circle (Playstation)
-        X,                  // (Xbox) --> Square (Playstation)
-        Y,                  // (Xbox) --> Triangle (Playstation)
+        LeftShoulder    = 0x0100,   // (Xbox) --> LeftShoulder (Playstation)
+        RightShoulder   = 0x0200,   // (Xbox) --> RightShoulder (Playstation)
+
+        A               = 0x1000,   // (Xbox) --> Cross (Playstation)
+        B               = 0x2000,   // (Xbox) --> Circle (Playstation)
+        X               = 0x4000,   // (Xbox) --> Square (Playstation)
+        Y               = 0x8000,   // (Xbox) --> Triangle (Playstation)
         //--- Digital ---
 
         //--- Analog ---
-        LeftTrigger,	    // (Xbox) --> LeftTrigger (Playstation)
-        RightTrigger,	    // (Xbox) --> RightTrigger (Playstation)
+        LeftTrigger     ,   // (Xbox) --> LeftTrigger (Playstation)
+        RightTrigger    ,   // (Xbox) --> RightTrigger (Playstation)
 
-        LeftThumbStick,     // (Xbox) --> LeftThumbStick (Playstation)
-        RightThumbStick,    // (Xbox) --> RightThumbStick (Playstation)
+        LeftThumbStick  ,   // (Xbox) --> LeftThumbStick (Playstation)
+        RightThumbStick ,   // (Xbox) --> RightThumbStick (Playstation)
         //--- Analog ---
     };
 
@@ -50,14 +54,13 @@ namespace dae
         Controller& operator=(const Controller&) = delete;
         Controller& operator=(const Controller&&) = delete;
     private:
+        bool IsPressed(unsigned int button) const;
+        bool IsPressedThisFrame(unsigned int button) const;
+        bool IsReleasedThisFrame(unsigned int button) const;
+
         int m_UserIndex;
         
         class ControllerImpl;
         std::unique_ptr<ControllerImpl> m_pImpl;
-        
-        unsigned int GetButtonCode(Buttons button) const;
-        bool IsPressed(unsigned int button) const;
-        bool IsPressedThisFrame(unsigned int button) const;
-        bool IsReleasedThisFrame(unsigned int button) const;
     };
 }

@@ -5,20 +5,20 @@
 
 namespace dae
 {
-	class GameObjectAction : public Action
+	class GameActorAction : public Action
 	{
 	protected:
 		GameActor* GetGameObject() const { return m_pOwner; }
 	public:
-		GameObjectAction(GameActor* pOwner) : m_pOwner(pOwner) {}
-		virtual ~GameObjectAction() = default;
+		GameActorAction(GameActor* pOwner) : m_pOwner(pOwner) {}
+		virtual ~GameActorAction() = default;
 	private:
 		GameActor* m_pOwner;
 	};
 
-	class Movement final : public GameObjectAction {
+	class Movement final : public GameActorAction {
 	public:
-		Movement(GameActor* pOwner) : GameObjectAction(pOwner) {}
+		Movement(GameActor* pOwner) : GameActorAction(pOwner) {}
 		void Execute() override
 		{
 			std::cout << "Move" << std::endl;
@@ -26,18 +26,18 @@ namespace dae
 		}
 	};
 
-	class Aim final : public GameObjectAction {
+	class Aim final : public GameActorAction {
 	public:
-		Aim(GameActor* pOwner) : GameObjectAction(pOwner) {}
+		Aim(GameActor* pOwner) : GameActorAction(pOwner) {}
 		void Execute() override
 		{
 			std::cout << "Aim" << std::endl;
 		}
 	};
 
-	class Shoot final : public GameObjectAction {
+	class Shoot final : public GameActorAction {
 	public:
-		Shoot(GameActor* pOwner) : GameObjectAction(pOwner) {}
+		Shoot(GameActor* pOwner) : GameActorAction(pOwner) {}
 		void Execute() override
 		{
 			std::cout << "Shoot" << std::endl;

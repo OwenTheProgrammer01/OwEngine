@@ -31,6 +31,9 @@
     <Filter Include="Event Manager">
       <UniqueIdentifier>{ff87e295-f98c-4bca-b0d2-e1d715cc7b4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SoundSystem">
+      <UniqueIdentifier>{b7ce86d2-3c55-4507-a328-59b451358516}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -96,7 +99,7 @@
     <ClInclude Include="Action.h">
       <Filter>Actions</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectAction.h">
+    <ClInclude Include="GameActorAction.h">
       <Filter>Actions</Filter>
     </ClInclude>
     <ClInclude Include="FPSComponent.h">
@@ -126,14 +129,17 @@
     <ClInclude Include="EventManager.h">
       <Filter>Event Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
-      <Filter>Event Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Observer.h">
       <Filter>Event Manager</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Event Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>SoundSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -214,6 +220,9 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>SoundSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -18,7 +18,7 @@
 #include "FPSComponent.h"
 
 #include "Controller.h"
-#include "GameObjectAction.h"
+#include "GameActorAction.h"
 
 void load()
 {

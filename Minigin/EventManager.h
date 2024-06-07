@@ -1,7 +1,7 @@
 #pragma once
-#include <memory>
 #include <queue>
-#include <string>
+#include <map>
+#include <functional>
 
 #include "Singleton.h"
 #include "Event.h"
@@ -17,11 +17,7 @@ namespace dae
 
         void ProcessEventQueue();
 
-        void BroadcastEvent(std::unique_ptr<Event> event);
-        void BroadcastBlockingEvent(std::unique_ptr<Event> event);
-
-        //std::shared_ptr<Observer> CreateObserver() const { return std::make_shared<Observer>(); }
-
+        void PlaceEventOnQueue(std::unique_ptr<Event> event);
         void RemoveEvent(const std::string& eventName);
 
         EventManager(const EventManager&) = delete;
@@ -32,12 +28,11 @@ namespace dae
         friend class Singleton<EventManager>;
 
         friend class Observer;
-        using fCallback = std::function<void(const Event&)>;
-        void RegisterObserver(std::weak_ptr<Observer> pObserver, fCallback fCallback, const std::string& eventName);
-        void ProcessEvent(std::unique_ptr<Event> event);
-        //void ProcessEvent(Event* event);
+        using fEventCallback = std::function<void(const Event&)>;
+        void RegisterObserver(std::weak_ptr<Observer> pObserver, fEventCallback fCallback, const std::string& eventName);
+        void HandleEvent(Event* event);
 
-        using ObserverCallback = std::vector<std::pair<std::weak_ptr<Observer>, fCallback>>;
+        using ObserverCallback = std::vector<std::pair<std::weak_ptr<Observer>, fEventCallback>>;
         std::map<std::string, ObserverCallback> m_EventCallbacks;
 
         std::queue<std::unique_ptr<Event>> m_EventQueue;

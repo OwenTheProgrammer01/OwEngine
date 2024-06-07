@@ -6,7 +6,7 @@ namespace dae
 	class Event
 	{
 	public:
-		Event(const std::string& eventName) : m_EventName{ eventName } {}
+		Event(const std::string& eventName) : m_EventName(eventName) {}
 		~Event() = default;
 
 		const std::string& GetEventName() const { return m_EventName; }
