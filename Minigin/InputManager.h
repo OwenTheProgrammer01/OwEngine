@@ -32,7 +32,7 @@ namespace dae
 
 		std::vector<std::unique_ptr<Device>> m_pDevices;
 
-		std::map<State, std::map<Keys, std::shared_ptr<Action>>> m_keyboardCommands; // state -> key -> action
+		//std::map<State, std::map<Keys, std::shared_ptr<Action>>> m_keyboardCommands; // state -> key -> action
 		std::map<State, std::map<Buttons, std::shared_ptr<Action>>> m_controllerCommands; // state -> button -> action
 	};
 }
