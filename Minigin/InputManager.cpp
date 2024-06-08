@@ -16,10 +16,10 @@ void dae::InputManager::RemoveDevice(int userIndex)
 	}
 }
 
-void dae::InputManager::BindCommand(State state, Keys key, std::shared_ptr<Action> action)
-{
-	m_keyboardCommands[state][key] = action;
-}
+//void dae::InputManager::BindCommand(State state, Keys key, std::shared_ptr<Action> action)
+//{
+//	m_keyboardCommands[state][key] = action;
+//}
 
 void dae::InputManager::BindCommand(State state, Buttons button, std::shared_ptr<Action> action)
 {
