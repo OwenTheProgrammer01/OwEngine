@@ -44,8 +44,8 @@ void load()
 	scene.Add(gaEnemy);
 
 	//---------- (Command & Pimpl) ----------
-	//input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
-	//auto gameActor = std::make_shared<dae::GameActor>();
+	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
+	auto gameActor = std::make_shared<dae::GameActor>();
 	//auto moveAction = std::make_shared<dae::Movement>(gameActor.get());
 	//auto moveComponent = std::make_shared<dae::MoveComponent>(gameActor.get());
 	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadLeft, moveAction);
@@ -53,8 +53,8 @@ void load()
 	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadUp, moveAction);
 	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadDown, moveAction);
 	//
-	//auto shootAction = std::make_shared<dae::Shoot>(gameActor.get());
-	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::RightShoulder, shootAction);
+	auto shootAction = std::make_shared<dae::Shoot>(gameActor.get());
+	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::RightShoulder, shootAction);
 	//
 	//auto aimAction = std::make_shared<dae::Aim>(gameActor.get());
 	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::LeftShoulder, aimAction);
