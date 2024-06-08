@@ -10,7 +10,7 @@ void dae::InputManager::AddDevice(std::unique_ptr<Device> pDevice)
 
 void dae::InputManager::RemoveDevice(int userIndex)
 {
-	if (userIndex >= 0 && userIndex < m_pDevices.size())
+	if (userIndex >= 0 && static_cast<size_t>(userIndex) < m_pDevices.size())
 	{
 		m_pDevices.erase(m_pDevices.begin() + userIndex);
 	}
