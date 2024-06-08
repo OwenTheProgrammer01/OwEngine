@@ -16,7 +16,7 @@ namespace dae
 		void AddDevice(std::unique_ptr<Device> pDevice);
 		void RemoveDevice(int userIndex);
 
-		void BindCommand(State state, Keys key, std::shared_ptr<Action> command); // For keyboard input
+		//void BindCommand(State state, Keys key, std::shared_ptr<Action> command); // For keyboard input
 		void BindCommand(State state, Buttons button, std::shared_ptr<Action> command); // For controller input
 
 		bool ProcessInput();

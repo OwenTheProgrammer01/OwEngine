@@ -111,9 +111,6 @@
     <ClInclude Include="TextComponent.h">
       <Filter>Basic Components</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Input</Filter>
-    </ClInclude>
     <ClInclude Include="Controller.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -158,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="SDLMixerSS.h">
       <Filter>Sound System</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +215,6 @@
     <ClCompile Include="TextComponent.cpp">
       <Filter>Basic Components</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
     <ClCompile Include="Controller.cpp">
       <Filter>Input</Filter>
     </ClCompile>
@@ -247,6 +244,9 @@
     </ClCompile>
     <ClCompile Include="ServiceLocator.cpp">
       <Filter>Sound System</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
