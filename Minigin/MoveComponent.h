@@ -14,10 +14,7 @@ namespace dae
 
 		void Update() override {}
 
-		void Move(const glm::vec2& speed)
-		{
-			auto addPosition = speed * GameTime::GetInstance().GetDeltaTime();
-		}
+		void Move(const glm::vec2& speed);
 
 		MoveComponent(const MoveComponent& other) = delete;
 		MoveComponent(MoveComponent&& other) = delete;

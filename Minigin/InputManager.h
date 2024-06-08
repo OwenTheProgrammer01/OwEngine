@@ -21,14 +21,14 @@ namespace dae
 
 		bool ProcessInput();
 
-		InputManager() = default;
-		~InputManager() = default;
+		virtual ~InputManager() = default;
 		InputManager(const InputManager& other) = delete;
 		InputManager(InputManager&& other) = delete;
 		InputManager& operator=(const InputManager& other) = delete;
 		InputManager& operator=(InputManager&& other) = delete;
 	private:
 		friend class Singleton<InputManager>;
+		InputManager() = default;
 
 		std::vector<std::unique_ptr<Device>> m_pDevices;
 

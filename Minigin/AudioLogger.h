@@ -11,16 +11,16 @@ namespace dae
 			: m_Wrapped(wrapped)
 		{}
 
-		void PlaySound(SoundID soundID, int volume) override
+		void PlaySound(SoundData soundData, int volume) override
 		{
 			Log("Play sound");
-			m_Wrapped.PlaySound(soundID, volume);
+			m_Wrapped.PlaySound(soundData, volume);
 		}
 
-		void MuteSound(SoundID soundID, bool mute) override
+		void MuteSound(SoundData soundData, bool mute) override
 		{
 			Log("Mute sound");
-			m_Wrapped.MuteSound(soundID, mute);
+			m_Wrapped.MuteSound(soundData, mute);
 		}
 
 		void MuteAllSounds(bool mute) override
@@ -29,10 +29,10 @@ namespace dae
 			m_Wrapped.MuteAllSounds(mute);
 		}
 
-		void StopSound(SoundID soundID) override
+		void StopSound(SoundData soundData) override
 		{
 			Log("Stop sound");
-			m_Wrapped.StopSound(soundID);
+			m_Wrapped.StopSound(soundData);
 		}
 
 		void StopAllSounds() override

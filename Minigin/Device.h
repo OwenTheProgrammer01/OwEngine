@@ -24,7 +24,7 @@ namespace dae
 
         virtual void ProcessInput() = 0;
 
-        //virtual void ProcessActions(std::map<State, std::map<Keys, std::shared_ptr<Action>>> keyboardCommands) = 0;
+        virtual void ProcessActions(std::map<State, std::map<Keys, std::shared_ptr<Action>>> keyboardCommands) = 0;
         virtual void ProcessActions(std::map<State, std::map<Buttons, std::shared_ptr<Action>>> controllerCommands) = 0;
 
         Device(const Device&) = delete;

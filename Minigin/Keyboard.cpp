@@ -1,6 +1,5 @@
 //#include <vector>
 //#include <map>
-//#include <iostream>
 //
 //#include "Keyboard.h"
 //#include "Windows.h"
@@ -42,8 +41,6 @@
 //	auto buttonChanges = m_CurrentState.Gamepad.wButtons ^ previousState.Gamepad.wButtons;
 //	m_ButtonsPressedThisFrame = buttonChanges & m_CurrentState.Gamepad.wButtons;
 //	m_ButtonsReleasedThisFrame = buttonChanges & (~m_CurrentState.Gamepad.wButtons);
-//
-//	std::cout << "Pressed: " << m_ButtonsPressedThisFrame << std::endl;
 //}
 //
 //unsigned int dae::Keyboard::KeyboardImpl::GetKeyCode(Keys key) const

@@ -9,14 +9,13 @@
 
 namespace dae
 {
+    using EventHandler = std::function<void()>;
 
     class EventManager final : public Singleton<EventManager>
     {
     public:
-        using EventHandler = std::function<void()>;
 
-        EventManager() = default;
-        ~EventManager() = default;
+        virtual ~EventManager() = default;
 
         void ProcessEventQueue();
 
@@ -31,6 +30,7 @@ namespace dae
         EventManager& operator=(const EventManager&&) = delete;
     private:
         friend class Singleton<EventManager>;
+        EventManager() = default;
 
         void HandleEvent(Event* pEvent);
 

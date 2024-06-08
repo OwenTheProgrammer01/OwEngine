@@ -44,53 +44,25 @@ void load()
 	scene.Add(gaEnemy);
 
 	//---------- (Command & Pimpl) ----------
-	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
-	auto gameActor = std::make_shared<dae::GameActor>();
-	auto moveAction = std::make_shared<dae::Movement>(gameActor.get());
-	auto moveComponent = std::make_shared<dae::MoveComponent>(gameActor.get());
-	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadLeft, moveAction); // Example for controller input
-	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadRight, moveAction);
-	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadUp, moveAction);
-	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadDown, moveAction);
-
-	auto shootAction = std::make_shared<dae::Shoot>(gameActor.get());
-	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::RightShoulder, shootAction);
-
-	auto aimAction = std::make_shared<dae::Aim>(gameActor.get());
-	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::LeftShoulder, aimAction);
-	//---------------------------------------
+	//input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
+	//auto gameActor = std::make_shared<dae::GameActor>();
+	//auto moveAction = std::make_shared<dae::Movement>(gameActor.get());
+	//auto moveComponent = std::make_shared<dae::MoveComponent>(gameActor.get());
+	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadLeft, moveAction);
+	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadRight, moveAction);
+	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadUp, moveAction);
+	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadDown, moveAction);
+	//
+	//auto shootAction = std::make_shared<dae::Shoot>(gameActor.get());
+	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::RightShoulder, shootAction);
+	//
+	//auto aimAction = std::make_shared<dae::Aim>(gameActor.get());
+	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::LeftShoulder, aimAction);
 
 	//---------- (Sound System) ----------
 	//InitializeSoundSystem
 	std::unique_ptr<dae::ISoundSystem> soundSystem = std::make_unique<dae::SDLMixerSS>();
 	dae::ServiceLocator::RegisterSoundSystem(std::move(soundSystem));
-
-	// Example usage
-	// Define some SoundID objects
-	dae::SoundData shoot{ 1, "Shoot.mp3" };
-	int volume = 100;
-	
-	// Play a sound
-	dae::ServiceLocator::GetSoundSystem().PlaySound(shoot, volume);
-	
-	//// Set volume for all sounds
-	//dae::ServiceLocator::GetSoundSystem().SetVolumeAllSounds(64);
-	//
-	//// Mute a specific sound
-	//dae::ServiceLocator::GetSoundSystem().MuteSound(shoot, true);
-	//
-	//// Mute all sounds
-	//dae::ServiceLocator::GetSoundSystem().MuteAllSounds(true);
-	//
-	//// Stop a specific sound
-	//dae::ServiceLocator::GetSoundSystem().StopSound(shoot);
-	//
-	//// Stop all sounds
-	//dae::ServiceLocator::GetSoundSystem().StopAllSounds();
-	//
-	//std::cout << "Sound operations completed!" << std::endl;
-	//------------------------------------
-
 }
 
 int main(int, char* []) {

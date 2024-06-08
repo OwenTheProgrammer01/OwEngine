@@ -1,6 +1,7 @@
 #pragma once
 #include "Action.h"
 #include "GameActor.h"
+#include "MoveComponent.h"
 #include <iostream>
 
 namespace dae
@@ -18,12 +19,14 @@ namespace dae
 
 	class Movement final : public GameActorAction {
 	public:
-		Movement(GameActor* pOwner) : GameActorAction(pOwner) {}
+		Movement(GameActor* pOwner, const glm::vec3 direction) : GameActorAction(pOwner), m_Direction(direction) {}
 		void Execute() override
 		{
 			std::cout << "Move" << std::endl;
-			//GetGameObject()->GetComponent<>();
+			GetGameObject()->GetComponent<MoveComponent>()->Move(m_Direction);
 		}
+	private:
+		glm::vec3 m_Direction;
 	};
 
 	class Aim final : public GameActorAction {
