@@ -12,7 +12,7 @@ namespace dae
 		MoveComponent(GameActor* pOwner) : BaseComponent(pOwner) {}
 		virtual ~MoveComponent() = default;
 
-		void Update() override {};
+		void Update() override {}
 
 		void Move(const glm::vec2& speed)
 		{

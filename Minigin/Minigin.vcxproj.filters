@@ -25,9 +25,6 @@
     <Filter Include="Actions">
       <UniqueIdentifier>{72be8bf6-e317-4c3c-b6c0-0b361908a28c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SoundSystem">
-      <UniqueIdentifier>{b7ce86d2-3c55-4507-a328-59b451358516}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Managers">
       <UniqueIdentifier>{b6556ae2-acbe-47b9-b7be-826d86d4dc82}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,9 @@
     </Filter>
     <Filter Include="Basic Components">
       <UniqueIdentifier>{bd7c7e36-f176-415e-aa46-cb1607130d73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound System">
+      <UniqueIdentifier>{b7ce86d2-3c55-4507-a328-59b451358516}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -126,8 +126,8 @@
     <ClInclude Include="Event.h">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="SoundSystem.h">
-      <Filter>SoundSystem</Filter>
+    <ClInclude Include="ISoundSystem.h">
+      <Filter>Sound System</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Header Files</Filter>
@@ -146,6 +146,18 @@
     </ClInclude>
     <ClInclude Include="MoveComponent.h">
       <Filter>Basic Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Sound System</Filter>
+    </ClInclude>
+    <ClInclude Include="NullAudio.h">
+      <Filter>Sound System</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioLogger.h">
+      <Filter>Sound System</Filter>
+    </ClInclude>
+    <ClInclude Include="SDLMixerSS.h">
+      <Filter>Sound System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +224,6 @@
     <ClCompile Include="Keyboard.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="SoundSystem.cpp">
-      <Filter>SoundSystem</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -232,6 +241,12 @@
     </ClCompile>
     <ClCompile Include="MoveComponent.cpp">
       <Filter>Basic Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SDLMixerSS.cpp">
+      <Filter>Sound System</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
+      <Filter>Sound System</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

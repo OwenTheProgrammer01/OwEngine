@@ -20,6 +20,9 @@
 
 #include "MoveComponent.h"
 
+#include "ServiceLocator.h"
+#include "SDLMixerSS.h"
+
 void load()
 {
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Tron - Battle Tanks");
@@ -56,10 +59,42 @@ void load()
 	auto aimAction = std::make_shared<dae::Aim>(gameActor.get());
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::LeftShoulder, aimAction);
 	//---------------------------------------
+
+	//---------- (Sound System) ----------
+	//InitializeSoundSystem
+	std::unique_ptr<dae::ISoundSystem> soundSystem = std::make_unique<dae::SDLMixerSS>();
+	dae::ServiceLocator::RegisterSoundSystem(std::move(soundSystem));
+
+	// Example usage
+	// Define some SoundID objects
+	dae::SoundData shoot{ 1, "Shoot.mp3" };
+	int volume = 100;
+	
+	// Play a sound
+	dae::ServiceLocator::GetSoundSystem().PlaySound(shoot, volume);
+	
+	//// Set volume for all sounds
+	//dae::ServiceLocator::GetSoundSystem().SetVolumeAllSounds(64);
+	//
+	//// Mute a specific sound
+	//dae::ServiceLocator::GetSoundSystem().MuteSound(shoot, true);
+	//
+	//// Mute all sounds
+	//dae::ServiceLocator::GetSoundSystem().MuteAllSounds(true);
+	//
+	//// Stop a specific sound
+	//dae::ServiceLocator::GetSoundSystem().StopSound(shoot);
+	//
+	//// Stop all sounds
+	//dae::ServiceLocator::GetSoundSystem().StopAllSounds();
+	//
+	//std::cout << "Sound operations completed!" << std::endl;
+	//------------------------------------
+
 }
 
 int main(int, char* []) {
-	dae::Minigin engine("../Data/");
+	dae::Minigin engine("../Data/", "Tron - Battle Tanks");
 	engine.Run(load);
 	return 0;
 }
