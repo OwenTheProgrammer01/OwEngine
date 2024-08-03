@@ -25,19 +25,19 @@
 
 void load()
 {
-	auto& scene = dae::SceneManager::GetInstance().CreateScene("Tron - Battle Tanks");
+	auto& scene = dae::SceneManager::GetInstance().CreateScene("Pacman");
 	auto& input = dae::InputManager::GetInstance();
 
 	auto gaPlayer = std::make_shared<dae::GameActor>();
 	auto rcPlayer = std::make_shared<dae::RenderComponent>(gaPlayer.get());
-	rcPlayer->SetTexture("Sprites/RedTank.png");
+	rcPlayer->SetTexture("Sprites/pacman.png");
 	gaPlayer->AddComponent(rcPlayer);
 	gaPlayer->SetWorldPosition({ 320,240,0 });
 	scene.Add(gaPlayer);
 
 	auto gaEnemy = std::make_shared<dae::GameActor>();
 	auto rcEnemy = std::make_shared<dae::RenderComponent>(gaEnemy.get());
-	rcEnemy->SetTexture("Sprites/BlueTank.png");
+	rcEnemy->SetTexture("Sprites/mspacman.png");
 	gaEnemy->AddComponent(rcEnemy);
 	gaEnemy->SetParent(gaPlayer.get());
 	gaEnemy->SetLocalPosition({ 50,0,0 });
@@ -66,7 +66,7 @@ void load()
 }
 
 int main(int, char* []) {
-	dae::Minigin engine("../Data/", "Tron - Battle Tanks");
+	dae::Minigin engine("../Data/", "Pacman");
 	engine.Run(load);
 	return 0;
 }
