@@ -22,28 +22,9 @@ namespace dae
 		Movement(GameActor* pOwner, const glm::vec3 direction) : GameActorAction(pOwner), m_Direction(direction) {}
 		void Execute() override
 		{
-			std::cout << "Move" << std::endl;
 			GetGameObject()->GetComponent<MoveComponent>()->Move(m_Direction);
 		}
 	private:
 		glm::vec3 m_Direction;
-	};
-
-	class Aim final : public GameActorAction {
-	public:
-		Aim(GameActor* pOwner) : GameActorAction(pOwner) {}
-		void Execute() override
-		{
-			std::cout << "Aim" << std::endl;
-		}
-	};
-
-	class Shoot final : public GameActorAction {
-	public:
-		Shoot(GameActor* pOwner) : GameActorAction(pOwner) {}
-		void Execute() override
-		{
-			std::cout << "Shoot" << std::endl;
-		}
 	};
 }

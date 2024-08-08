@@ -1,7 +1,8 @@
 #include "MoveComponent.h"
 #include "GameTime.h"
+#include <iostream>
 
-void dae::MoveComponent::Move(const glm::vec2& speed)
+void dae::MoveComponent::Move(const glm::vec2& dir)
 {
-	auto addPosition = speed * GameTime::GetInstance().GetDeltaTime();
+	GetOwner()->SetWorldPosition(GetOwner()->GetWorldPosition() + glm::vec3((dir * GameTime::GetInstance().GetDeltaTime() * m_Speed), 0));
 }

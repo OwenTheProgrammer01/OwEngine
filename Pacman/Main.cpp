@@ -45,19 +45,24 @@ void load()
 
 	//---------- (Command & Pimpl) ----------
 	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
-	auto gameActor = std::make_shared<dae::GameActor>();
-	//auto moveAction = std::make_shared<dae::Movement>(gameActor.get());
-	//auto moveComponent = std::make_shared<dae::MoveComponent>(gameActor.get());
-	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadLeft, moveAction);
-	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadRight, moveAction);
-	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadUp, moveAction);
-	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::DPadDown, moveAction);
 	//
-	auto shootAction = std::make_shared<dae::Shoot>(gameActor.get());
-	input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::RightShoulder, shootAction);
+	auto moveComponent = std::make_shared<dae::MoveComponent>(gaPlayer.get());
+	gaPlayer->AddComponent(moveComponent);
+	auto moveLeft = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(-1, 0, 0));
+	auto moveRight = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(1, 0, 0));
+	auto moveUp = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(0, -1, 0));
+	auto moveDown = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(0, 1, 0));
+	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadLeft, moveLeft);
+	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadRight, moveRight);
+	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadUp, moveUp);
+	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadDown, moveDown);
+	
+	//auto move = std::make_shared<dae::Movement>(gaPlayer.get());
+	//input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadLeft, move);
+	//input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadRight, move);
+	//input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadUp, move);
+	//input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadDown, move);
 	//
-	//auto aimAction = std::make_shared<dae::Aim>(gameActor.get());
-	//input.BindCommand(dae::State::IsPressedThisFrame, dae::Buttons::LeftShoulder, aimAction);
 
 	//---------- (Sound System) ----------
 	//InitializeSoundSystem
