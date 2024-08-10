@@ -18,9 +18,9 @@ namespace dae
 		void SetLocalPosition(const glm::vec3 localPos);
 		const glm::vec3& GetLocalPosition() const { return m_LocalPos; }
 
+		void Translate(const glm::vec3& translation);
 		void Rotate(const float angle);
 		void LookAt(const glm::vec3& target);
-		void LookAt(const float angle);
 
 		Transform(const Transform&) = delete;
 		Transform(Transform&&) = delete;
@@ -31,5 +31,6 @@ namespace dae
 		glm::vec3 m_WorldPos;
 		glm::vec3 m_LookAt;
 		glm::vec3 m_Scale;
+		glm::vec3 m_Speed;
 	};
 }

@@ -3,9 +3,10 @@
 
 #include "Transform.h"
 #include "GameActor.h"
+#include "GameTime.h"
 
 dae::Transform::Transform()
-	: m_LocalPos(), m_WorldPos(), m_LookAt(), m_Scale()
+	: m_LocalPos(), m_WorldPos(), m_LookAt(), m_Scale(), m_Speed(100.f)
 {}
 
 void dae::Transform::SetWorldPosition(const glm::vec3 worldPos)
@@ -16,6 +17,11 @@ void dae::Transform::SetWorldPosition(const glm::vec3 worldPos)
 void dae::Transform::SetLocalPosition(const glm::vec3 localPos)
 {
 	m_LocalPos = localPos;
+}
+
+void dae::Transform::Translate(const glm::vec3& translation)
+{
+    SetWorldPosition(GetWorldPosition() + translation * m_Speed);
 }
 
 void dae::Transform::Rotate(const float angle)
@@ -29,9 +35,4 @@ void dae::Transform::Rotate(const float angle)
 void dae::Transform::LookAt(const glm::vec3& target)
 {
     m_LookAt = target - m_WorldPos;
-}
-
-void dae::Transform::LookAt(const float angle)
-{
-    m_LookAt = glm::vec3(cos(angle), sin(angle), 0);
 }

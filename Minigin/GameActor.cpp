@@ -64,6 +64,11 @@ const glm::vec3 dae::GameActor::GetLocalPosition()
 	return m_Transform.GetLocalPosition();
 }
 
+void dae::GameActor::Translate(const glm::vec3& translation)
+{
+	m_Transform.Translate(translation);
+}
+
 void dae::GameActor::Rotate(float angle)
 {
 	m_Transform.Rotate(angle);
@@ -73,11 +78,6 @@ void dae::GameActor::Rotate(float angle)
 void dae::GameActor::LookAt(const glm::vec3& target)
 {
 	m_Transform.LookAt(target);
-}
-
-void dae::GameActor::LookAt(const float angle)
-{
-	m_Transform.LookAt(angle);
 }
 
 void dae::GameActor::SetPosDirty()

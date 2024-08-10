@@ -141,9 +141,6 @@
     <ClInclude Include="GameActor.h">
       <Filter>GameActor</Filter>
     </ClInclude>
-    <ClInclude Include="MoveComponent.h">
-      <Filter>Basic Components</Filter>
-    </ClInclude>
     <ClInclude Include="ServiceLocator.h">
       <Filter>Sound System</Filter>
     </ClInclude>
@@ -235,9 +232,6 @@
     </ClCompile>
     <ClCompile Include="GameActor.cpp">
       <Filter>GameActor</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveComponent.cpp">
-      <Filter>Basic Components</Filter>
     </ClCompile>
     <ClCompile Include="SDLMixerSS.cpp">
       <Filter>Sound System</Filter>

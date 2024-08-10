@@ -18,8 +18,6 @@
 #include "GameActorAction.h"
 #include "EventManager.h"
 
-#include "MoveComponent.h"
-
 #include "ServiceLocator.h"
 #include "SDLMixerSS.h"
 
@@ -39,30 +37,22 @@ void load()
 	auto rcEnemy = std::make_shared<dae::RenderComponent>(gaEnemy.get());
 	rcEnemy->SetTexture("Sprites/mspacman.png");
 	gaEnemy->AddComponent(rcEnemy);
+	gaEnemy->SetWorldPosition({ 50,0,0 });
 	gaEnemy->SetParent(gaPlayer.get());
-	gaEnemy->SetLocalPosition({ 50,0,0 });
 	scene.Add(gaEnemy);
 
 	//---------- (Command & Pimpl) ----------
 	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
 	//
-	auto moveComponent = std::make_shared<dae::MoveComponent>(gaPlayer.get());
-	gaPlayer->AddComponent(moveComponent);
 	auto moveLeft = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(-1, 0, 0));
 	auto moveRight = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(1, 0, 0));
-	auto moveUp = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(0, -1, 0));
-	auto moveDown = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(0, 1, 0));
+	auto moveUp = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(0, 1, 0));
+	auto moveDown = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(0, -1, 0));
+	//
 	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadLeft, moveLeft);
 	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadRight, moveRight);
 	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadUp, moveUp);
 	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadDown, moveDown);
-	
-	//auto move = std::make_shared<dae::Movement>(gaPlayer.get());
-	//input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadLeft, move);
-	//input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadRight, move);
-	//input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadUp, move);
-	//input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadDown, move);
-	//
 
 	//---------- (Sound System) ----------
 	//InitializeSoundSystem

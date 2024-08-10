@@ -1,7 +1,9 @@
 #pragma once
 #include "Action.h"
 #include "GameActor.h"
-#include "MoveComponent.h"
+#include "Transform.h"
+#include "GameTime.h"
+#include <glm/glm.hpp>
 #include <iostream>
 
 namespace dae
@@ -19,10 +21,14 @@ namespace dae
 
 	class Movement final : public GameActorAction {
 	public:
-		Movement(GameActor* pOwner, const glm::vec3 direction) : GameActorAction(pOwner), m_Direction(direction) {}
+		Movement(GameActor* pOwner, const glm::vec3 direction) : GameActorAction(pOwner), m_Direction(direction) 
+		{
+			m_Direction = glm::normalize(glm::vec3{ direction.x, -direction.y, 0 });
+		}
 		void Execute() override
 		{
-			GetGameObject()->GetComponent<MoveComponent>()->Move(m_Direction);
+			auto deltaMovement = dae::GameTime::GetInstance().GetDeltaTime() * m_Direction;
+			GetGameObject()->Translate(deltaMovement);
 		}
 	private:
 		glm::vec3 m_Direction;
