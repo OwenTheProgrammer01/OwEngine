@@ -40,6 +40,9 @@
     <Filter Include="Sound System">
       <UniqueIdentifier>{b7ce86d2-3c55-4507-a328-59b451358516}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Json">
+      <UniqueIdentifier>{8e6ceb47-04c4-4ecd-b5e4-dfdcc7da6a06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -155,6 +158,15 @@
     </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="json_fwd.hpp">
+      <Filter>Json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Pacman\JsonFile.h">
+      <Filter>Json</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

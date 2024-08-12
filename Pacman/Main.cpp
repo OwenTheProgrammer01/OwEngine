@@ -6,10 +6,9 @@
 #endif
 
 #include "Minigin.h"
-#include "SceneManager.h"
-#include "ResourceManager.h"
-#include "InputManager.h"
 #include "Scene.h"
+#include "InputManager.h"
+#include "ResourceManager.h"
 
 #include "GameActor.h"
 
@@ -21,10 +20,23 @@
 #include "ServiceLocator.h"
 #include "SDLMixerSS.h"
 
+#include "LevelManager.h"
+
 void load()
 {
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Pacman");
 	auto& input = dae::InputManager::GetInstance();
+	auto& levelManager = LevelManager::GetInstance();
+
+	// Load Background
+	auto gaBackground = std::make_shared<dae::GameActor>();
+	auto rcBackground = std::make_shared<dae::RenderComponent>(gaBackground.get());
+	rcBackground->SetTexture("background.tga");
+	gaBackground->AddComponent(rcBackground);
+	scene.Add(gaBackground);
+
+	//Load Level
+	levelManager.LoadLevel("Level");
 
 	auto gaPlayer = std::make_shared<dae::GameActor>();
 	auto rcPlayer = std::make_shared<dae::RenderComponent>(gaPlayer.get());
@@ -40,7 +52,7 @@ void load()
 	gaEnemy->SetWorldPosition({ 50,0,0 });
 	gaEnemy->SetParent(gaPlayer.get());
 	scene.Add(gaEnemy);
-
+	
 	//---------- (Command & Pimpl) ----------
 	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
 	//
@@ -53,11 +65,10 @@ void load()
 	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadRight, moveRight);
 	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadUp, moveUp);
 	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadDown, moveDown);
-
+	
 	//---------- (Sound System) ----------
-	//InitializeSoundSystem
-	std::unique_ptr<dae::ISoundSystem> soundSystem = std::make_unique<dae::SDLMixerSS>();
-	dae::ServiceLocator::RegisterSoundSystem(std::move(soundSystem));
+	//std::unique_ptr<dae::ISoundSystem> soundSystem = std::make_unique<dae::SDLMixerSS>();
+	//dae::ServiceLocator::RegisterSoundSystem(std::move(soundSystem));
 }
 
 int main(int, char* []) {

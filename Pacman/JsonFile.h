@@ -1,10 +1,13 @@
-#include <iostream>
 #include <fstream>
+
+#pragma warning (push)
+#pragma warning (disable: 4459)
 #include "json.hpp"
+#pragma warning (pop)
 
 using json = nlohmann::json;
 
-class JsonFile 
+class JsonFile
 {
 public:
     // Constructor opens the file
@@ -17,8 +20,7 @@ public:
     }
 
     // Destructor closes the file
-    ~JsonFile()
-    {
+    ~JsonFile() {
         if (file.is_open()) { file.close(); }
     }
 

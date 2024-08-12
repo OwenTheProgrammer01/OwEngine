@@ -13,8 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Json">
-      <UniqueIdentifier>{77a8d905-e3e4-4205-beff-5b15ca905667}</UniqueIdentifier>
+    <Filter Include="Level Blocks">
+      <UniqueIdentifier>{dc5d4ca2-1c62-4bd3-871a-b66967b72881}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{a657033e-b344-4e6c-a02a-f768bc312853}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,19 +27,28 @@
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Level Blocks</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelBlock.cpp">
+      <Filter>Level Blocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="JsonFile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Minigin\json.hpp">
-      <Filter>Json</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Minigin\json_fwd.hpp">
-      <Filter>Json</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>Level Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelBlock.h">
+      <Filter>Level Blocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -56,8 +56,8 @@ dae::Minigin::Minigin(const std::string &dataPath, const std::string &windowTitl
 		windowTitle.c_str(),
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		640,
-		480,
+		1024,
+		768,
 		SDL_WINDOW_OPENGL
 	);
 	if (g_window == nullptr) 

@@ -61,9 +61,9 @@ namespace dae
 		size_t GetChildCount() { return m_pChildren.size(); }
 		GameActor* GetChildAt(unsigned int index) const { return m_pChildren[index]; }
 
-		void SetWorldPosition(const glm::vec3& pos);
+		void SetWorldPosition(const glm::vec3& worldPos);
 		const glm::vec3 GetWorldPosition();
-		void SetLocalPosition(const glm::vec3& pos);
+		void SetLocalPosition(const glm::vec3& localPos);
 		const glm::vec3 GetLocalPosition();
 		void Translate(const glm::vec3& translation);
 		void Rotate(const float angle);
