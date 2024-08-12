@@ -19,12 +19,12 @@
     <Filter Include="Managers">
       <UniqueIdentifier>{a657033e-b344-4e6c-a02a-f768bc312853}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Characters">
+      <UniqueIdentifier>{c835b51d-b4b8-47c1-b741-3d765efcfd3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Wall.cpp">
@@ -36,11 +36,11 @@
     <ClCompile Include="LevelBlock.cpp">
       <Filter>Level Blocks</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Characters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Wall.h">
       <Filter>Level Blocks</Filter>
     </ClInclude>
@@ -49,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="LevelBlock.h">
       <Filter>Level Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Characters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

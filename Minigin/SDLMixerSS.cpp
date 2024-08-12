@@ -9,6 +9,8 @@
 #include <SDL_mixer.h>
 #include "ISoundSystem.h"
 
+//TODO: Fix this SoundSystem implementation
+
 class dae::SDLMixerSS::SDLImpl
 {
 public:
