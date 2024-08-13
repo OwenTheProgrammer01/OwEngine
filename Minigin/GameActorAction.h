@@ -2,9 +2,7 @@
 #include "Action.h"
 #include "GameActor.h"
 #include "Transform.h"
-#include "GameTime.h"
 #include <glm/glm.hpp>
-#include <iostream>
 #include "ServiceLocator.h"
 
 namespace dae
@@ -32,5 +30,34 @@ namespace dae
 		}
 	private:
 		glm::vec3 m_Direction;
+	};
+
+	class PlaySound final : public GameActorAction {
+	public:
+		PlaySound(GameActor* pOwner, const std::string& soundPath) : GameActorAction(pOwner), m_SoundPath(soundPath) {}
+		void Execute() override
+		{
+			ServiceLocator::GetSoundSystem().PlaySound(m_SoundPath, 100);
+		}
+	private:
+		std::string m_SoundPath;
+	};
+
+	class MuteAllSounds final : public GameActorAction {
+	public:
+		MuteAllSounds(GameActor* pOwner) : GameActorAction(pOwner) {}
+		void Execute() override
+		{
+			ServiceLocator::GetSoundSystem().MuteAllSounds(true);
+		}
+	};
+
+	class UnmuteAllSounds final : public GameActorAction {
+	public:
+		UnmuteAllSounds(GameActor* pOwner) : GameActorAction(pOwner) {}
+		void Execute() override
+		{
+			ServiceLocator::GetSoundSystem().MuteAllSounds(false);
+		}
 	};
 }

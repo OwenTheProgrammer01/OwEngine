@@ -92,10 +92,7 @@ void dae::SDLMixerSS::SDLImpl::SetVolumeAllSounds(int volume)
 {
     m_AllMuted = false;
     m_MasterVolume = volume;
-    for (auto& pair : m_SoundChannels)
-    {
-        Mix_Volume(pair.second, m_MasterVolume);
-    }
+    Mix_Volume(-1, m_MasterVolume);
 }
 
 void dae::SDLMixerSS::SDLImpl::MuteSound(Sound sound, bool mute)
@@ -110,7 +107,7 @@ void dae::SDLMixerSS::SDLImpl::MuteSound(Sound sound, bool mute)
 void dae::SDLMixerSS::SDLImpl::MuteAllSounds(bool mute)
 {
     m_AllMuted = mute;
-    SetVolumeAllSounds(mute ? 0 : m_MasterVolume);
+	Mix_Volume(-1, mute ? 0 : m_MasterVolume);
 }
 
 void dae::SDLMixerSS::SDLImpl::StopSound(Sound sound)
