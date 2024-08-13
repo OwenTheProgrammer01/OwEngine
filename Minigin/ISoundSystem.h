@@ -4,13 +4,7 @@
 
 namespace dae
 {
-	using SoundID = unsigned short;
-
-	struct SoundData
-	{
-		SoundID ID;
-		std::string filePath;
-	};
+	using Sound = std::string;
 
 	class ISoundSystem abstract
 	{
@@ -18,11 +12,11 @@ namespace dae
 		ISoundSystem() = default;
 		virtual ~ISoundSystem() = default;
 
-		virtual void PlaySound(SoundData soundData, int volume) = 0;
+		virtual void PlaySound(Sound sound, int volume) = 0;
 		virtual void SetVolumeAllSounds(int volume) = 0;
-		virtual void MuteSound(SoundData soundData, bool mute) = 0;
+		virtual void MuteSound(Sound sound, bool mute) = 0;
 		virtual void MuteAllSounds(bool mute) = 0;
-		virtual void StopSound(SoundData soundData) = 0;
+		virtual void StopSound(Sound sound) = 0;
 		virtual void StopAllSounds() = 0;
 
 		ISoundSystem(const ISoundSystem& other) = delete;

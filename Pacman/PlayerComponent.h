@@ -1,6 +1,8 @@
 #pragma once
 //TODO: Finish player class
 #include "BaseComponent.h"
+#include <string>
+#include <glm/glm.hpp>
 
 class GameActor;
 class PlayerComponent final : public dae::BaseComponent
@@ -11,8 +13,11 @@ public:
 
 	PlayerComponent(dae::GameActor* pOwner);
 	virtual ~PlayerComponent() = default;
+
 	PlayerComponent(const PlayerComponent& other) = delete;
 	PlayerComponent(PlayerComponent&& other) = delete;
 	PlayerComponent& operator=(const PlayerComponent& other) = delete;
 	PlayerComponent& operator=(PlayerComponent&& other) = delete;
+private:
+
 };

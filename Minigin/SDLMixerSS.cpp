@@ -17,16 +17,16 @@ public:
     SDLImpl();
     ~SDLImpl();
 
-    void PlaySound(SoundData soundData, int volume);
+    void PlaySound(Sound sound, int volume);
     void SetVolumeAllSounds(int volume);
-    void MuteSound(SoundData soundData, bool mute);
+    void MuteSound(Sound sound, bool mute);
     void MuteAllSounds(bool mute);
-    void StopSound(SoundData soundData);
+    void StopSound(Sound sound);
     void StopAllSounds();
 private:
-    std::unordered_map<SoundID, Mix_Chunk*> m_Sounds;
-    std::unordered_map<SoundID, int> m_SoundChannels;
-    std::queue<SoundData> m_LoadQueue;
+    std::unordered_map<Sound, Mix_Chunk*> m_Sounds;
+    std::unordered_map<Sound, int> m_SoundChannels;
+    std::queue<Sound> m_LoadQueue;
     int m_MasterVolume;
     bool m_AllMuted;
 
@@ -35,8 +35,8 @@ private:
     std::jthread m_LoadThread;
     bool m_ExitThread;
 
-    Mix_Chunk* GetChunk(SoundData soundData);
-    void LoadSound(SoundData soundData);
+    Mix_Chunk* GetChunk(Sound sound);
+    void LoadSound(Sound sound);
     void ProcessQueue();
 };
 
@@ -58,26 +58,23 @@ dae::SDLMixerSS::SDLImpl::SDLImpl() : m_MasterVolume(MIX_MAX_VOLUME), m_AllMuted
 
 dae::SDLMixerSS::SDLImpl::~SDLImpl()
 {
-    m_LoadThread.request_stop();
-
-    for (auto& pair : m_Sounds)
     {
-        Mix_FreeChunk(pair.second);
+        std::lock_guard<std::mutex> lock(m_QueueMutex);
+        m_ExitThread = true;
     }
-    m_Sounds.clear();
-    Mix_CloseAudio();
+    m_QueueCondition.notify_all();
 }
 
-void dae::SDLMixerSS::SDLImpl::PlaySound(SoundData soundData, int volume)
+void dae::SDLMixerSS::SDLImpl::PlaySound(Sound sound, int volume)
 {
-    Mix_Chunk* chunk = GetChunk(soundData);
+    Mix_Chunk* chunk = GetChunk(sound);
     if (chunk)
     {
         int channel = Mix_PlayChannel(-1, chunk, 0);
         if (channel != -1)
         {
             Mix_Volume(channel, m_AllMuted ? 0 : volume);
-            m_SoundChannels[soundData.ID] = channel;
+            m_SoundChannels[sound] = channel;
         }
     }
     else
@@ -85,7 +82,7 @@ void dae::SDLMixerSS::SDLImpl::PlaySound(SoundData soundData, int volume)
         // If the chunk is not available, queue it for loading
         {
             std::lock_guard<std::mutex> lock(m_QueueMutex);
-            m_LoadQueue.push(soundData);
+            m_LoadQueue.push(sound);
         }
         m_QueueCondition.notify_one();
     }
@@ -101,9 +98,9 @@ void dae::SDLMixerSS::SDLImpl::SetVolumeAllSounds(int volume)
     }
 }
 
-void dae::SDLMixerSS::SDLImpl::MuteSound(SoundData soundData, bool mute)
+void dae::SDLMixerSS::SDLImpl::MuteSound(Sound sound, bool mute)
 {
-    auto it = m_SoundChannels.find(soundData.ID);
+    auto it = m_SoundChannels.find(sound);
     if (it != m_SoundChannels.end())
     {
         Mix_Volume(it->second, mute ? 0 : m_MasterVolume);
@@ -116,9 +113,9 @@ void dae::SDLMixerSS::SDLImpl::MuteAllSounds(bool mute)
     SetVolumeAllSounds(mute ? 0 : m_MasterVolume);
 }
 
-void dae::SDLMixerSS::SDLImpl::StopSound(SoundData soundData)
+void dae::SDLMixerSS::SDLImpl::StopSound(Sound sound)
 {
-    auto it = m_SoundChannels.find(soundData.ID);
+    auto it = m_SoundChannels.find(sound);
     if (it != m_SoundChannels.end())
     {
         Mix_HaltChannel(it->second);
@@ -139,17 +136,17 @@ void dae::SDLMixerSS::SDLImpl::ProcessQueue()
 
     while (!m_LoadQueue.empty())
     {
-        SoundData soundData = m_LoadQueue.front();
+        Sound sound = m_LoadQueue.front();
         m_LoadQueue.pop();
         lock.unlock();
-        LoadSound(soundData);
+        LoadSound(sound);
         lock.lock();
     }
 }
 
-Mix_Chunk* dae::SDLMixerSS::SDLImpl::GetChunk(SoundData soundData)
+Mix_Chunk* dae::SDLMixerSS::SDLImpl::GetChunk(Sound sound)
 {
-    auto it = m_Sounds.find(soundData.ID);
+    auto it = m_Sounds.find(sound);
     if (it != m_Sounds.end())
     {
         return it->second;
@@ -160,13 +157,13 @@ Mix_Chunk* dae::SDLMixerSS::SDLImpl::GetChunk(SoundData soundData)
     }
 }
 
-void dae::SDLMixerSS::SDLImpl::LoadSound(SoundData soundData)
+void dae::SDLMixerSS::SDLImpl::LoadSound(Sound sound)
 {
-    std::string fullpath = "../Data/Sounds/" + soundData.filePath;
+    std::string fullpath = "../Data/Sounds/" + sound;
     Mix_Chunk* chunk = Mix_LoadWAV(fullpath.c_str());
     if (chunk)
     {
-        m_Sounds[soundData.ID] = chunk;
+        m_Sounds[sound] = chunk;
     }
     else
     {
@@ -174,13 +171,15 @@ void dae::SDLMixerSS::SDLImpl::LoadSound(SoundData soundData)
     }
 }
 
-dae::SDLMixerSS::SDLMixerSS() : m_Impl(std::make_unique<SDLImpl>()) {}
+dae::SDLMixerSS::SDLMixerSS() 
+    : m_Impl(std::make_unique<SDLImpl>())
+{}
 
 dae::SDLMixerSS::~SDLMixerSS() = default;
 
-void dae::SDLMixerSS::PlaySound(SoundData soundData, int volume)
+void dae::SDLMixerSS::PlaySound(Sound sound, int volume)
 {
-	m_Impl->PlaySound(soundData, volume);
+	m_Impl->PlaySound(sound, volume);
 }
 
 void dae::SDLMixerSS::SetVolumeAllSounds(int volume)
@@ -188,9 +187,9 @@ void dae::SDLMixerSS::SetVolumeAllSounds(int volume)
 	m_Impl->SetVolumeAllSounds(volume);
 }
 
-void dae::SDLMixerSS::MuteSound(SoundData soundData, bool mute)
+void dae::SDLMixerSS::MuteSound(Sound sound, bool mute)
 {
-	m_Impl->MuteSound(soundData, mute);
+	m_Impl->MuteSound(sound, mute);
 }
 
 void dae::SDLMixerSS::MuteAllSounds(bool mute)
@@ -198,9 +197,9 @@ void dae::SDLMixerSS::MuteAllSounds(bool mute)
 	m_Impl->MuteAllSounds(mute);
 }
 
-void dae::SDLMixerSS::StopSound(SoundData soundData)
+void dae::SDLMixerSS::StopSound(Sound sound)
 {
-	m_Impl->StopSound(soundData);
+	m_Impl->StopSound(sound);
 }
 
 void dae::SDLMixerSS::StopAllSounds()

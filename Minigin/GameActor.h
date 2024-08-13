@@ -65,6 +65,8 @@ namespace dae
 		const glm::vec3 GetWorldPosition();
 		void SetLocalPosition(const glm::vec3& localPos);
 		const glm::vec3 GetLocalPosition();
+		void SetSpeed(const glm::vec3& speed);
+		glm::vec3 GetTranslation();
 		void Translate(const glm::vec3& translation);
 		void Rotate(const float angle);
 		void LookAt(const glm::vec3& target);

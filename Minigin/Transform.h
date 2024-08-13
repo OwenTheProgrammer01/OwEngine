@@ -2,11 +2,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "BaseComponent.h"
-
 namespace dae
 {
-	class GameActor;
 	class Transform final
 	{
 	public:
@@ -18,7 +15,9 @@ namespace dae
 		void SetLocalPosition(const glm::vec3 localPos);
 		const glm::vec3& GetLocalPosition() const { return m_LocalPos; }
 
+		void SetSpeed(const glm::vec3& speed) { m_Speed = speed; }
 		void Translate(const glm::vec3& translation);
+		glm::vec3 GetTranslation() const { return m_Translation; }
 		void Rotate(const float angle);
 		void LookAt(const glm::vec3& target);
 
@@ -32,5 +31,6 @@ namespace dae
 		glm::vec3 m_LookAt;
 		glm::vec3 m_Scale;
 		glm::vec3 m_Speed;
+		glm::vec3 m_Translation;
 	};
 }

@@ -22,6 +22,9 @@
     <Filter Include="Characters">
       <UniqueIdentifier>{c835b51d-b4b8-47c1-b741-3d765efcfd3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actions">
+      <UniqueIdentifier>{f879ce29-acfb-4174-a964-49c82d84a941}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -42,6 +45,9 @@
     <ClCompile Include="Pellet.cpp">
       <Filter>Level Blocks</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerSpawn.cpp">
+      <Filter>Level Blocks</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Wall.h">
@@ -58,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="Pellet.h">
       <Filter>Level Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerSpawn.h">
+      <Filter>Level Blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="GameAction.h">
+      <Filter>Actions</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -64,6 +64,16 @@ const glm::vec3 dae::GameActor::GetLocalPosition()
 	return m_Transform.GetLocalPosition();
 }
 
+void dae::GameActor::SetSpeed(const glm::vec3& speed)
+{
+	m_Transform.SetSpeed(speed);
+}
+
+glm::vec3 dae::GameActor::GetTranslation()
+{
+	return m_Transform.GetTranslation();
+}
+
 void dae::GameActor::Translate(const glm::vec3& translation)
 {
 	m_Transform.Translate(translation);

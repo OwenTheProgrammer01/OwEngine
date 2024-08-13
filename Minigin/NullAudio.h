@@ -9,11 +9,11 @@ namespace dae
 		NullAudio() = default;
 		~NullAudio() override = default;
 
-		void PlaySound(SoundData soundData, int volume) override { soundData; volume; /* Do nothing. */ }
+		void PlaySound(Sound sound, int volume) override { sound; volume; /* Do nothing. */ }
 		void SetVolumeAllSounds(int volume) override { volume; /* Do nothing */ };
-		void MuteSound(SoundData soundData, bool mute) override { soundData; mute; /* Do nothing. */ }
+		void MuteSound(Sound sound, bool mute) override { sound; mute; /* Do nothing. */ }
 		void MuteAllSounds(bool mute) override { mute; /* Do nothing. */ }
-		void StopSound(SoundData soundData) override { soundData; /* Do nothing. */ }
+		void StopSound(Sound sound) override { sound; /* Do nothing. */ }
 		void StopAllSounds() override { /* Do nothing. */ }
 	};
 }

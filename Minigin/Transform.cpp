@@ -6,7 +6,7 @@
 #include "GameTime.h"
 
 dae::Transform::Transform()
-	: m_LocalPos(), m_WorldPos(), m_LookAt(), m_Scale(), m_Speed(100.f)
+	: m_LocalPos(), m_WorldPos(), m_LookAt(), m_Scale(), m_Speed(100.f), m_Translation()
 {}
 
 void dae::Transform::SetWorldPosition(const glm::vec3 worldPos)
@@ -21,7 +21,8 @@ void dae::Transform::SetLocalPosition(const glm::vec3 localPos)
 
 void dae::Transform::Translate(const glm::vec3& translation)
 {
-    SetWorldPosition(GetWorldPosition() + translation * m_Speed);
+    m_Translation = translation;
+    SetWorldPosition(GetWorldPosition() + GameTime::GetInstance().GetDeltaTime() * translation * m_Speed);
 }
 
 void dae::Transform::Rotate(const float angle)

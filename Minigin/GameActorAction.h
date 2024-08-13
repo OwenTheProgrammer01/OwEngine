@@ -5,6 +5,7 @@
 #include "GameTime.h"
 #include <glm/glm.hpp>
 #include <iostream>
+#include "ServiceLocator.h"
 
 namespace dae
 {
@@ -27,8 +28,7 @@ namespace dae
 		}
 		void Execute() override
 		{
-			auto deltaMovement = dae::GameTime::GetInstance().GetDeltaTime() * m_Direction;
-			GetGameObject()->Translate(deltaMovement);
+			GetGameObject()->Translate(m_Direction);
 		}
 	private:
 		glm::vec3 m_Direction;

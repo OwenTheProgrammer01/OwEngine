@@ -1,6 +1,4 @@
 #pragma once
-#include <map>
-#include <string>
 #include "ISoundSystem.h"
 
 namespace dae
@@ -9,14 +7,19 @@ namespace dae
 	{
 	public:
 		SDLMixerSS();
-		~SDLMixerSS() override;
+		virtual ~SDLMixerSS() override;
 
-		void PlaySound(SoundData soundData, int volume) override;
+		void PlaySound(Sound sound, int volume) override;
 		void SetVolumeAllSounds(int volume) override;
-		void MuteSound(SoundData soundData, bool mute) override;
+		void MuteSound(Sound sound, bool mute) override;
 		void MuteAllSounds(bool mute) override;
-		void StopSound(SoundData soundData) override;
+		void StopSound(Sound sound) override;
 		void StopAllSounds() override;
+
+		SDLMixerSS(const SDLMixerSS& other) = delete;
+		SDLMixerSS(SDLMixerSS&& other) = delete;
+		SDLMixerSS& operator=(const SDLMixerSS& other) = delete;
+		SDLMixerSS& operator=(SDLMixerSS&& other) = delete;
 	private:
 		class SDLImpl;
 		std::unique_ptr<SDLImpl> m_Impl;
