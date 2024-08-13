@@ -22,13 +22,14 @@ void LevelManager::LoadLevel(const std::string& levelName)
     // Read the grid
     std::vector<std::vector<int>> grid = levelData["grid"];
 
+    int width = gridSize[0];
+    int height = gridSize[1];
+
     // Print the grid
-    int row = 0;
-    for (const auto& sequence : grid) {
-        int column = 0;
-        for (const auto& tile : sequence) {
+    for (int row = 0; row < height; ++row) {
+        for (int column = 0; column < width; ++column) {
             auto pos = m_GridStartPos + glm::vec3(column * tileSize, row * tileSize, 0);
-            switch (tile)
+            switch (grid[row][column])
             {
             case 0:
                 // Empty
@@ -81,8 +82,16 @@ void LevelManager::LoadLevel(const std::string& levelName)
             default:
                 break;
             }
-            column++;
         }
-        row++;
     }
+    // Spawn player
+    for (const auto& block : m_LevelBlocks)
+	{
+        PlayerSpawn* playerSpawn = dynamic_cast<PlayerSpawn*>(block.get());
+        if (playerSpawn != nullptr)
+		{
+			playerSpawn->SpawnPlayer();
+            break;
+		}
+	}
 }

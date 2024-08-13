@@ -37,7 +37,7 @@ void load()
 
 	//Load Level
 	levelManager.LoadLevel("Level");
-	
+
 	//---------- (Sound System) ----------
 	std::unique_ptr<dae::ISoundSystem> soundSystem = std::make_unique<dae::SDLMixerSS>();
 	dae::ServiceLocator::RegisterSoundSystem(std::move(soundSystem));

@@ -6,7 +6,7 @@
 #include "GameTime.h"
 
 dae::Transform::Transform()
-	: m_LocalPos(), m_WorldPos(), m_LookAt(), m_Scale(), m_Speed(100.f), m_Translation()
+	: m_LocalPos(), m_WorldPos(), m_LookAt(), m_Scale(), m_Speed(80.f), m_Translation()
 {}
 
 void dae::Transform::SetWorldPosition(const glm::vec3 worldPos)

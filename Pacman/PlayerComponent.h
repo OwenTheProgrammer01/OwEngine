@@ -1,5 +1,4 @@
 #pragma once
-//TODO: Finish player class
 #include "BaseComponent.h"
 #include <string>
 #include <glm/glm.hpp>
@@ -18,6 +17,4 @@ public:
 	PlayerComponent(PlayerComponent&& other) = delete;
 	PlayerComponent& operator=(const PlayerComponent& other) = delete;
 	PlayerComponent& operator=(PlayerComponent&& other) = delete;
-private:
-
 };
