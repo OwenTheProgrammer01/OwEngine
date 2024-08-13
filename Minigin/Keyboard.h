@@ -1,145 +1,76 @@
-//#pragma once
-//#include "Device.h"
-//
-//namespace dae
-//{
-//    enum class Keys
-//    {
-//        //--- Keys ---
-//        Escape,
-//        F1,
-//        F2,
-//        F3,
-//        F4,
-//        F5,
-//        F6,
-//        F7,
-//        F8,
-//        F9,
-//        F10,
-//        F11,
-//        F12,
-//        PrintScreen,
-//        ScrollLock,
-//        Pause,
-//
-//        //
-//        Key1,
-//        Key2,
-//        Key3,
-//        Key4,
-//        Key5,
-//        Key6,
-//        Key7,
-//        Key8,
-//        Key9,
-//        Key0,
-//        //
-//        //
-//        Backspace,
-//        Insert,
-//        Home,
-//        pageUp,
-//
-//        Tab,
-//        Q,
-//        W,
-//        E,
-//        R,
-//        T,
-//        Y,
-//        U,
-//        I,
-//        O,
-//        P,
-//        //
-//        //
-//        //
-//        Delete,
-//        End,
-//        Down,
-//
-//        CapsLock,
-//        A,
-//        S,
-//        D,
-//        F,
-//        G,
-//        H,
-//        J,
-//        K,
-//        L,
-//        //
-//        //
-//        Enter,
-//
-//        LeftShift,
-//        Z,
-//        X,
-//        C,
-//        V,
-//        B,
-//        N,
-//        M,
-//        //
-//        //
-//        //
-//        RightShift,
-//        Up,
-//
-//        LeftCtrl,
-//        //
-//        LeftAlt,
-//        
-//        Shift,
-//        Ctrl,
-//        RightCtrl,
-//        Alt,
-//        RightAlt,
-//        PageDown,
-//        Left,
-//        Right,
-//        NumPad0,
-//        NumPad1,
-//        NumPad2,
-//        NumPad3,
-//        NumPad4,
-//        NumPad5,
-//        NumPad6,
-//        NumPad7,
-//        NumPad8,
-//        NumPad9,
-//        Multiply,
-//        Add,
-//        Subtract,
-//        Decimal,
-//        Divide,
-//        NumLock
-//    };
-//
-//    class Keyboard final : public Device
-//    {
-//    public:
-//        Keyboard(int userIndex);
-//        virtual ~Keyboard() override;
-//
-//        void ProcessInput() override;
-//
-//        virtual void ProcessActions(std::map<State, std::map<Keys, std::shared_ptr<Action>>> keyboardCommands) override;
-//
-//        Keyboard(const Keyboard&) = delete;
-//        Keyboard(Keyboard&&) = delete;
-//        Keyboard& operator=(const Keyboard&) = delete;
-//        Keyboard& operator=(const Keyboard&&) = delete;
-//    private:
-//        int m_UserIndex;
-//
-//        class KeyboardImpl;
-//        std::unique_ptr<KeyboardImpl> m_pImpl;
-//
-//        unsigned int GetKeyCode(Keys key) const;
-//        bool IsPressed(unsigned int key) const;
-//        bool IsPressedThisFrame(unsigned int key) const;
-//        bool IsReleasedThisFrame(unsigned int key) const;
-//    };
-//}
+#pragma once
+#include "Device.h"
+
+namespace dae
+{
+    enum class Keys
+    {
+        Default = 0,
+
+        ArrowUp = 82,
+        ArrowDown = 81,
+        ArrowLeft = 80,
+        ArrowRight = 79,
+
+        Space = 44,
+        Enter = 40,
+        Escape = 41,
+
+        A = 4,
+        B = 5,
+        C = 6,
+        D = 7,
+        E = 8,
+        F = 9,
+        G = 10,
+        H = 11,
+        I = 12,
+        J = 13,
+        K = 14,
+        L = 15,
+        M = 16,
+        N = 17,
+        O = 18,
+        P = 19,
+        Q = 20,
+        R = 21,
+        S = 22,
+        T = 23,
+        U = 24,
+        V = 25,
+        W = 26,
+        X = 27,
+        Y = 28,
+        Z = 29,
+
+        LeftCtrl = 224,
+        LeftShift = 225,
+        LeftAlt = 226,
+        RightCtrl = 228,
+        RightShift = 229,
+        RightAlt = 230
+    };
+
+    class Keyboard final : public Device
+    {
+    public:
+        Keyboard();
+        virtual ~Keyboard() override;
+
+        void ProcessInput() override;
+
+        void ProcessActions(std::map<State, std::map<Keys, std::shared_ptr<Action>>> keyboardCommands) override;
+
+        Keyboard(const Keyboard&) = delete;
+        Keyboard(Keyboard&&) = delete;
+        Keyboard& operator=(const Keyboard&) = delete;
+        Keyboard& operator=(const Keyboard&&) = delete;
+    private:
+        bool IsPressed(Keys key) const;
+        bool IsPressedThisFrame(Keys key) const;
+        bool IsReleasedThisFrame(Keys key) const;
+
+        class KeyboardImpl;
+        std::unique_ptr<KeyboardImpl> m_pImpl;
+    };
+}

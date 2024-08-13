@@ -1,6 +1,4 @@
 #pragma once
-#include <glm/glm.hpp>
-
 #include "Device.h"
 
 namespace dae
@@ -47,7 +45,7 @@ namespace dae
         
         void ProcessInput() override;
 
-        virtual void ProcessActions(std::map<State, std::map<Buttons, std::shared_ptr<Action>>> controllerCommands) override;
+        void ProcessActions(std::map<State, std::map<Buttons, std::shared_ptr<Action>>> controllerCommands) override;
 
         Controller(const Controller&) = delete;
         Controller(Controller&&) = delete;

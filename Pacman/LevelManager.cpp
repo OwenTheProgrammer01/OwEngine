@@ -1,8 +1,9 @@
 #include "LevelManager.h"
 #include "JsonFile.h"
 #include "Wall.h"
-//#include "Pellet.h"
+#include "Pellet.h"
 //#include "PowerPellet.h"
+#include "PlayerComponent.h"
 
 //TODO: change switch case (so i dont repeatedly have to write "path")
 
@@ -41,7 +42,7 @@ void LevelManager::LoadLevel(const std::string& levelName)
                 // Path
                 m_LevelBlocks.emplace_back(std::make_unique<Wall>("Path", pos));
                 // Pellet
-                m_LevelBlocks.emplace_back(std::make_unique<Wall>("Pellet", pos));
+                m_LevelBlocks.emplace_back(std::make_unique<Pellet>("Pellet", pos));
                 break;
             case 3:
                 // Path
@@ -69,7 +70,7 @@ void LevelManager::LoadLevel(const std::string& levelName)
                 // Path
                 m_LevelBlocks.emplace_back(std::make_unique<Wall>("Path", pos));
                 // Player Spawn
-                m_LevelBlocks.emplace_back(std::make_unique<Wall>("Pacman", pos));
+                //m_LevelBlocks.emplace_back(std::make_unique<Wall>("Pacman", pos));
                 break;
             case 8:
                 // Path

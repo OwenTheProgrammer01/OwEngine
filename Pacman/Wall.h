@@ -1,5 +1,4 @@
 #pragma once
-#include <glm/glm.hpp>
 #include "LevelBlock.h"
 
 class Wall final : public LevelBlock

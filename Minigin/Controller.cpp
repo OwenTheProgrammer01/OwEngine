@@ -1,7 +1,3 @@
-#include <vector>
-#include <map>
-#include <iostream>
-
 #include "Controller.h"
 #include "Windows.h"
 #include "Xinput.h"

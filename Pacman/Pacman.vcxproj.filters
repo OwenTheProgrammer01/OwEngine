@@ -36,8 +36,11 @@
     <ClCompile Include="LevelBlock.cpp">
       <Filter>Level Blocks</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="PlayerComponent.cpp">
       <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Pellet.cpp">
+      <Filter>Level Blocks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,8 +53,11 @@
     <ClInclude Include="LevelBlock.h">
       <Filter>Level Blocks</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="PlayerComponent.h">
       <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Pellet.h">
+      <Filter>Level Blocks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

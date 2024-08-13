@@ -14,6 +14,7 @@
 
 #include "RenderComponent.h"
 #include "Controller.h"
+#include "Keyboard.h"
 #include "GameActorAction.h"
 #include "EventManager.h"
 
@@ -42,7 +43,7 @@ void load()
 	auto rcPlayer = std::make_shared<dae::RenderComponent>(gaPlayer.get());
 	rcPlayer->SetTexture("Sprites/pacman.png");
 	gaPlayer->AddComponent(rcPlayer);
-	gaPlayer->SetWorldPosition({ 320,240,0 });
+	gaPlayer->SetWorldPosition({ 320,50,0 });
 	scene.Add(gaPlayer);
 
 	auto gaEnemy = std::make_shared<dae::GameActor>();
@@ -55,6 +56,7 @@ void load()
 	
 	//---------- (Command & Pimpl) ----------
 	input.AddDevice(std::move(std::make_unique<dae::Controller>(0)));
+	input.AddDevice(std::move(std::make_unique<dae::Keyboard>()));
 	//
 	auto moveLeft = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(-1, 0, 0));
 	auto moveRight = std::make_shared<dae::Movement>(gaPlayer.get(), glm::vec3(1, 0, 0));
@@ -65,6 +67,11 @@ void load()
 	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadRight, moveRight);
 	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadUp, moveUp);
 	input.BindCommand(dae::State::IsPressed, dae::Buttons::DPadDown, moveDown);
+	//
+	input.BindCommand(dae::State::IsPressed, dae::Keys::ArrowLeft, moveLeft);
+	input.BindCommand(dae::State::IsPressed, dae::Keys::ArrowRight, moveRight);
+	input.BindCommand(dae::State::IsPressed, dae::Keys::ArrowUp, moveUp);
+	input.BindCommand(dae::State::IsPressed, dae::Keys::ArrowDown, moveDown);
 	
 	//---------- (Sound System) ----------
 	//std::unique_ptr<dae::ISoundSystem> soundSystem = std::make_unique<dae::SDLMixerSS>();
