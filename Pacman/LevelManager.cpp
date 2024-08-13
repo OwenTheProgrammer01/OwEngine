@@ -38,6 +38,7 @@ void LevelManager::LoadLevel(const std::string& levelName)
             case 1:
                 // Wall
                 m_LevelBlocks.emplace_back(std::make_unique<Wall>("Wall", pos));
+                m_WallPositions.push_back(pos);
                 break;
             case 2:;
                 // Path

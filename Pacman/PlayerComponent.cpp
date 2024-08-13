@@ -1,9 +1,11 @@
 #include "PlayerComponent.h"
 #include "InputManager.h"
 #include "GameAction.h"
+#include "GameTime.h"
+#include "LevelManager.h"
 
 PlayerComponent::PlayerComponent(dae::GameActor* pOwner)
-	: dae::BaseComponent(pOwner)
+	: dae::BaseComponent(pOwner), m_Speed(48.0f)
 {
 	auto& input = dae::InputManager::GetInstance();
 
@@ -28,14 +30,42 @@ PlayerComponent::PlayerComponent(dae::GameActor* pOwner)
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Keys::D, moveRight);
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Keys::W, moveUp);
 	input.BindCommand(dae::State::IsPressedThisFrame, dae::Keys::S, moveDown);
+
+	pOwner->SetSpeed(m_Speed);
 }
 
 void PlayerComponent::Update()
 {
-	GetOwner()->Translate(GetOwner()->GetTranslation());
+	auto& levelManager = LevelManager::GetInstance();
+	auto newPos = GetOwner()->GetWorldPosition() + dae::GameTime::GetInstance().GetDeltaTime() * GetOwner()->GetTranslation() * m_Speed;
+
+	//if (IsCollidingWithWall(newPos, levelManager.GetWallPositions())) 
+	//{
+	//	GetOwner()->SetWorldPosition(GetOwner()->GetWorldPosition());
+	//}
+	//else
+	//{
+	//	// Update player position if no collision
+	//	GetOwner()->Translate(GetOwner()->GetTranslation());
+	//}
+
+	if (!IsCollidingWithWall(newPos, levelManager.GetWallPositions()))
+	{
+		// Update player position if no collision
+		GetOwner()->Translate(GetOwner()->GetTranslation());
+	}
 }
 
 void PlayerComponent::Render() const
 {
 	
+}
+
+bool PlayerComponent::IsCollidingWithWall(const glm::vec3& newPos, const std::vector<glm::vec3>& wallPositions) {
+	for (const auto& wallPos : wallPositions) {
+		if (glm::distance(newPos, wallPos) < 15.5f) {
+			return true;
+		}
+	}
+	return false;
 }

@@ -15,6 +15,8 @@ class LevelManager final : public dae::Singleton<LevelManager>
 public:
 	void LoadLevel(const std::string& levelName);
 
+	const std::vector<glm::vec3>& GetWallPositions() const { return m_WallPositions; }
+
 	virtual ~LevelManager() = default;
 	LevelManager(const LevelManager& other) = delete;
 	LevelManager(LevelManager&& other) = delete;
@@ -27,4 +29,5 @@ private:
 	const glm::vec3 m_GridStartPos{ 288, 136, 0 };
 	const std::string& m_FolderPath = "../Data/LoadFiles/";
 	std::vector<std::unique_ptr<LevelBlock>> m_LevelBlocks{};
+	std::vector<glm::vec3> m_WallPositions;
 };
